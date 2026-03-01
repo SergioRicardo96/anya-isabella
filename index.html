@@ -254,7 +254,7 @@
             padding: 2.5rem 2rem;
             text-align: center;
             overflow: hidden;
-            cursor: pointer;
+            cursor: default;
             transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s;
             border: 1px solid rgba(255,255,255,0.08);
         }
@@ -265,6 +265,7 @@
         }
 
         .card::before {
+            pointer-events: none;
             content: '';
             position: absolute;
             inset: 0;
@@ -275,6 +276,7 @@
         .card:hover::before { opacity: 0.25; }
 
         .card::after {
+            pointer-events: none;
             content: '';
             position: absolute;
             inset: 0;
