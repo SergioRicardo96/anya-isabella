@@ -51,6 +51,10 @@
             overflow-x:hidden;
         }
 
+        html, body {
+            touch-action: none;
+        }
+
         /* ── ROSAS CAYENDO — reducidas y sin filtros en móvil ── */
         #rose-rain{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;will-change:contents}
         .rose-drop{
@@ -1213,6 +1217,21 @@
 <button class="music-btn" id="musicBtn" title="Música" aria-label="Reproducir música">🎵</button>
 
 <script>
+    document.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault(); // bloquea doble tap zoom
+        }
+        lastTouchEnd = now;
+    }, false);
+
     /* ═══════════════════════════════════════
        DETECCIÓN DE CAPACIDAD DEL DISPOSITIVO
        ═══════════════════════════════════════ */
@@ -1499,7 +1518,7 @@
                     /* Desbloquear scroll cuando el castillo termina (~10s) */
                     setTimeout(() => { document.body.style.overflow = ''; }, 9000);
                 });
-            }, 2800);
+            }, 3200);
 
         }, 700);
     }
