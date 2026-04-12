@@ -52,7 +52,7 @@
         }
 
         html, body {
-            touch-action: none;
+            touch-action: manipulation;
         }
 
         /* ── ROSAS CAYENDO — reducidas y sin filtros en móvil ── */
@@ -1219,7 +1219,7 @@
 <script>
     document.addEventListener('touchstart', function (event) {
         if (event.touches.length > 1) {
-            event.preventDefault();
+            event.preventDefault(); // solo bloquea pinch
         }
     }, { passive: false });
 
