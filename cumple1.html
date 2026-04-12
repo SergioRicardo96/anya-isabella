@@ -651,6 +651,29 @@
             .reveal{opacity:1!important;transform:none!important}
             .curio-card{opacity:1!important;transform:none!important}
         }
+
+        /* ── SCROLL HINT ── */
+        .scroll-hint{
+            position:absolute;bottom:1.8rem;
+            left:0;right:0;
+            display:flex;flex-direction:column;align-items:center;gap:.4rem;
+            opacity:0;animation:fadeUp 1s 2s forwards;z-index:2;pointer-events:none;
+        }
+        .scroll-hint-text{
+            font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.35em;
+            text-transform:uppercase;color:#8a5010;opacity:.75;white-space:nowrap;
+        }
+        .scroll-hint-arrow{
+            width:28px;height:28px;border-right:2px solid #c9943a;border-bottom:2px solid #c9943a;
+            transform:rotate(45deg);animation:scrollBounce 1.6s ease-in-out infinite;
+            margin-top:-4px;opacity:.7;
+        }
+        @keyframes scrollBounce{
+            0%,100%{transform:rotate(45deg) translateY(0)}
+            50%{transform:rotate(45deg) translateY(6px)}
+        }
+        /* Se oculta cuando el usuario ya scrolleó */
+        .scroll-hint.hidden{opacity:0!important;transition:opacity .6s}
     </style>
 </head>
 <body>
@@ -901,6 +924,11 @@
             <div class="name-isabella">ISABELLA</div>
         </div>
         <span class="subtitle">Primer cumpleaños</span>
+    </div>
+
+    <div class="scroll-hint" id="scrollHint">
+        <span class="scroll-hint-text">Descubre más</span>
+        <div class="scroll-hint-arrow"></div>
     </div>
 </section>
 
@@ -1420,6 +1448,19 @@
 
         /* Recalcular posición al rotar o redimensionar */
         window.addEventListener('resize', () => goTo(cur), {passive: true});
+    })();
+
+    /* ── SCROLL HINT: se oculta al hacer scroll ── */
+    (function(){
+        const hint = document.getElementById('scrollHint');
+        if (!hint) return;
+        let hidden = false;
+        window.addEventListener('scroll', () => {
+            if (!hidden && window.scrollY > 60) {
+                hidden = true;
+                hint.classList.add('hidden');
+            }
+        }, {passive: true});
     })();
 </script>
 </body>
