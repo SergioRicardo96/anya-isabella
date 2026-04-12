@@ -3,290 +3,392 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Primer Cumpleaños de Anya Isabella 🌹</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23fff0f5'/><text y='48' x='8' font-size='46'>🌹</text></svg>" />
 
-    <!-- ═══ SEO básico ═══ -->
-    <meta name="description" content="Con amor te invitamos a celebrar el Primer Cumpleaños de Anya Isabella 🌹 — Un día mágico lleno de alegría y momentos inolvidables." />
+    <meta name="description" content="Con amor te invitamos a celebrar el Primer Cumpleaños de Anya Isabella 🌹" />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="theme-color" content="#3a1800" />
 
-    <!-- ═══ Open Graph (WhatsApp, Facebook, iMessage, Telegram…) ═══ -->
     <meta property="og:type"        content="website" />
     <meta property="og:title"       content="💌 Estás invitado al Primer Cumpleaños de Anya Isabella 🌹" />
     <meta property="og:description" content="Abre el sobre y descubre una celebración mágica llena de encanto 🌹" />
     <meta property="og:image"       content="/assets/img/invitacion.jpg" />
-    <meta property="og:image:width"  content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt"   content="Invitación Primer Cumpleaños Anya Isabella" />
     <meta property="og:locale"      content="es_MX" />
 
-    <!-- ═══ Twitter / X Card ═══ -->
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="💌 Estás invitado al Primer Cumpleaños de Anya Isabella 🌹" />
-    <meta name="twitter:description" content="Una invitación mágica llena de momentos especiales 🌹" />
-    <meta name="twitter:image"       content="/assets/img/invitacion.jpg" />
-    <meta name="twitter:image:alt"   content="Invitación Primer Cumpleaños Anya Isabella" />
+    <!-- ── Fuentes: preconnect + font-display=swap para no bloquear render ── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
     <style>
+        /* ── RESET + VARIABLES ── */
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         :root{
             --gold:#8a5010;--gold-bright:#c9943a;--gold-deep:#5a2e00;
             --gold-pale:#fdf0d8;--gold-shine:#f0c060;
             --crimson:#8b0000;--rose:#c41230;--rose-light:#e84060;
-            --dark:#2d1800;--dark-mid:#f5e8c8;--dark-rich:#fdf0d8;
-            --parchment:#fdf5e0;--text-main:#3a1800;--text-light:#5a2e00;
-            --bg1:#f5e8c8;--bg2:#fdf0d8;--bg3:#fef5e0;
+            --dark:#2d1800;--parchment:#fdf5e0;
+            --text-main:#3a1800;--text-light:#5a2e00;
         }
+
+        /* ── Detectar móvil real: desactivar cursor rosa y efectos pesados ── */
+        @media (hover:none){
+            body{cursor:auto}
+        }
+        @media (hover:hover){
+            body{
+                cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E🌹%3C/text%3E%3C/svg%3E") 12 12,auto;
+            }
+        }
+
         html{scroll-behavior:smooth}
         body{
             background:linear-gradient(160deg,#f0deb8 0%,#fdf0d8 35%,#fef8e8 65%,#f5e8c8 100%);
             color:var(--text-main);
             font-family:'Cormorant Garamond',serif;
             overflow-x:hidden;
-            cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E🌹%3C/text%3E%3C/svg%3E") 12 12,auto;
         }
-        /* Rosas cayendo */
-        #rose-rain{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-        .rose-drop{position:absolute;top:-40px;font-size:18px;animation:roseFall linear infinite;opacity:0;filter:drop-shadow(0 2px 4px rgba(139,0,0,.35))}
+
+        /* ── ROSAS CAYENDO — reducidas y sin filtros en móvil ── */
+        #rose-rain{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;will-change:contents}
+        .rose-drop{
+            position:absolute;top:-40px;font-size:18px;
+            animation:roseFall linear infinite;opacity:0;
+        }
         @keyframes roseFall{
-            0%{transform:translateY(-5vh) rotate(0deg) translateX(0);opacity:0}
-            8%{opacity:.9}
-            80%{opacity:.6}
-            100%{transform:translateY(108vh) rotate(300deg) translateX(40px);opacity:0}
+            0%  {transform:translateY(-5vh) rotate(0deg);opacity:0}
+            8%  {opacity:.85}
+            80% {opacity:.55}
+            100%{transform:translateY(108vh) rotate(280deg) translateX(30px);opacity:0}
         }
+
+        /* ── PARTÍCULAS FLOTANTES ── */
         #particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-        .particle{position:absolute;top:-30px;animation:particleFall linear infinite;opacity:0;font-size:11px;filter:drop-shadow(0 0 3px rgba(139,0,0,.4))}
-        @keyframes particleFall{0%{transform:translateY(-5vh) rotate(0deg) translateX(0);opacity:0}5%{opacity:.7}85%{opacity:.4}100%{transform:translateY(110vh) rotate(720deg) translateX(60px);opacity:0}}
-        .sparkle{position:absolute;pointer-events:none;width:4px;height:4px;border-radius:50%;background:var(--gold-shine);animation:sparklePulse ease-in-out infinite;box-shadow:0 0 5px 2px rgba(201,148,58,.5)}
-        @keyframes sparklePulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:.8;transform:scale(1.5)}}
-        .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1.5rem;
-            background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,148,58,.18) 0%,transparent 60%),
-            radial-gradient(ellipse 60% 40% at 0% 100%,rgba(240,192,96,.15) 0%,transparent 50%),
-            radial-gradient(ellipse 60% 40% at 100% 100%,rgba(240,192,96,.15) 0%,transparent 50%),
-            linear-gradient(180deg,#f0deb8 0%,#fdf0d8 45%,#f8e8c8 100%);overflow:hidden}
-        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 80% at 50% 50%,transparent 50%,rgba(180,120,40,.12) 100%);pointer-events:none;z-index:0}
+        .particle{position:absolute;top:-30px;animation:particleFall linear infinite;opacity:0;font-size:11px}
+        @keyframes particleFall{0%{transform:translateY(-5vh) rotate(0deg);opacity:0}5%{opacity:.6}85%{opacity:.35}100%{transform:translateY(110vh) rotate(680deg) translateX(50px);opacity:0}}
+
+        /* ── DESTELLOS (solo desktop) ── */
+        .sparkle{position:absolute;pointer-events:none;width:4px;height:4px;border-radius:50%;background:var(--gold-shine);animation:sparklePulse ease-in-out infinite;box-shadow:0 0 5px 2px rgba(201,148,58,.4)}
+        @keyframes sparklePulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:.7;transform:scale(1.4)}}
+        @media(max-width:600px){.sparkle{display:none}}
+
+        /* ── HERO ── */
+        .hero{
+            position:relative;z-index:1;min-height:100svh;
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
+            text-align:center;padding:2rem 1.5rem;
+            background:linear-gradient(180deg,#f0deb8 0%,#fdf0d8 50%,#f8e8c8 100%);
+            overflow:hidden;isolation:isolate;
+        }
         .hero-top-ornament{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,transparent,#7a5010,#c9943a,#8a5010,#c9943a,#7a5010,transparent)}
         .hero-inner{position:relative;z-index:2;max-width:600px}
-        .crown-label{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.5em;text-transform:uppercase;color:#7a5010;opacity:0;animation:fadeUp 1.2s .3s forwards;margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+
+        .crown-label{
+            font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.5em;text-transform:uppercase;
+            color:#7a5010;opacity:0;animation:fadeUp 1.2s .3s forwards;margin-bottom:1.5rem;
+            display:flex;align-items:center;gap:.8rem;
+        }
         .crown-label::before,.crown-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#c9943a,#8a5010)}
         .crown-label::after{background:linear-gradient(90deg,#8a5010,#c9943a,transparent)}
-        .photo-frame-wrap{position:relative;margin:0 auto 2rem;width:min(260px,65vw);height:min(300px,75vw);opacity:0;animation:scaleIn 1.4s .5s cubic-bezier(.34,1.4,.64,1) forwards}
-        .photo-ring{position:absolute;inset:-12px;background:conic-gradient(var(--gold-shine) 0deg,var(--gold-deep) 40deg,var(--gold-bright) 80deg,var(--gold-deep) 120deg,var(--gold-shine) 160deg,var(--gold-deep) 200deg,var(--gold-bright) 240deg,var(--gold-deep) 280deg,var(--gold-shine) 320deg,var(--gold-deep) 360deg);animation:ringRotate 12s linear infinite;border-radius:50% 50% 50% 50%/60% 60% 40% 40%}
+
+        /* ── FOTO OVAL — anillo sin filtros en móvil ── */
+        .photo-frame-wrap{
+            position:relative;margin:0 auto 2rem;
+            width:min(260px,65vw);height:min(300px,75vw);
+            opacity:0;animation:scaleIn 1.4s .5s cubic-bezier(.34,1.4,.64,1) forwards;
+        }
+        .photo-ring{
+            position:absolute;inset:-12px;
+            background:conic-gradient(var(--gold-shine) 0deg,var(--gold-deep) 40deg,var(--gold-bright) 80deg,var(--gold-deep) 120deg,var(--gold-shine) 160deg,var(--gold-deep) 200deg,var(--gold-bright) 240deg,var(--gold-deep) 280deg,var(--gold-shine) 320deg,var(--gold-deep) 360deg);
+            animation:ringRotate 14s linear infinite;
+            border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+            will-change:transform;
+        }
         @keyframes ringRotate{to{transform:rotate(360deg)}}
         .photo-ring-inner{position:absolute;inset:4px;background:#fdf0d8;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;z-index:1}
-        .photo-oval{position:absolute;inset:0;z-index:2;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;overflow:hidden;background:#f5e8c8;box-shadow:0 0 0 2px #8a5010,0 0 30px rgba(201,148,58,.35),inset 0 0 20px rgba(90,46,0,.1)}
-        .photo-oval img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform .6s ease}
-        .photo-oval img:hover{transform:scale(1.1)}
-        .rose-deco{position:absolute;font-size:2.2rem;z-index:3;filter:drop-shadow(0 4px 8px rgba(139,0,0,.6));animation:roseSway 4s ease-in-out infinite}
-        @keyframes roseSway{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(8deg) scale(1.08)}}
-        .rose-tl{top:-15px;left:-20px;animation-delay:0s}.rose-tr{top:-15px;right:-20px;animation-delay:.8s}.rose-bl{bottom:10px;left:-25px;animation-delay:1.6s}.rose-br{bottom:10px;right:-25px;animation-delay:.4s}
+        .photo-oval{
+            position:absolute;inset:0;z-index:2;
+            border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+            overflow:hidden;background:#f5e8c8;
+            box-shadow:0 0 0 2px #8a5010,0 0 20px rgba(201,148,58,.25);
+        }
+        .photo-oval img{width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
+        .rose-deco{position:absolute;font-size:2.2rem;z-index:3;animation:roseSway 4s ease-in-out infinite}
+        @keyframes roseSway{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(8deg) scale(1.07)}}
+        .rose-tl{top:-15px;left:-20px}.rose-tr{top:-15px;right:-20px;animation-delay:.8s}
+        .rose-bl{bottom:10px;left:-25px;animation-delay:1.6s}.rose-br{bottom:10px;right:-25px;animation-delay:.4s}
+        @media(max-width:480px){.rose-deco{font-size:1.7rem}}
+
+        /* ── NOMBRES ── */
         .name-block{margin-bottom:.5rem}
-        .name-anya{font-family:'Cinzel Decorative',cursive;font-size:clamp(2.8rem,12vw,5rem);font-weight:900;background:linear-gradient(180deg,#c9943a 0%,#8a5010 40%,#5a2e00 80%,#3a1800 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;filter:drop-shadow(0 3px 8px rgba(90,46,0,.25));opacity:0;animation:fadeUp 1s 1s forwards;letter-spacing:.05em}
-        .name-isabella{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.6rem,7vw,3rem);font-weight:700;background:linear-gradient(180deg,#c9943a 0%,#8a5010 50%,#5a2e00 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;filter:drop-shadow(0 2px 6px rgba(90,46,0,.2));opacity:0;animation:fadeUp 1s 1.2s forwards;letter-spacing:.08em}
-        .convocatoria{text-align: center;font-family:'Cinzel Decorative',cursive;font-size:clamp(1.2rem,5vw,3rem);font-weight:550;background:linear-gradient(180deg,#c9943a 0%,#8a5010 50%,#5a2e00 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;filter:drop-shadow(0 2px 6px rgba(90,46,0,.2));letter-spacing:.08em}
-        .subtitle{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(1rem,4vw,1.4rem);color:#8b0000;opacity:0;animation:fadeUp 1s 1.4s forwards;margin:.8rem 0 .3rem;text-shadow:0 1px 4px rgba(139,0,0,.2);letter-spacing:.05em}
-        .subtitle-line{display:flex;align-items:center;justify-content:center;gap:.8rem;opacity:0;animation:fadeUp 1s 1.5s forwards}
-        .sub-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,#c9943a)}.sub-divider.r{background:linear-gradient(90deg,#c9943a,transparent)}
-        .sub-text{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:#7a5010}
-        .bounce-unused{}
-        @keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+        .name-anya{
+            font-family:'Cinzel Decorative',cursive;font-size:clamp(2.8rem,12vw,5rem);font-weight:900;
+            background:linear-gradient(180deg,#c9943a 0%,#8a5010 40%,#5a2e00 80%,#3a1800 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            line-height:1;opacity:0;animation:fadeUp 1s 1s forwards;letter-spacing:.05em;
+        }
+        .name-isabella{
+            font-family:'Cinzel Decorative',cursive;font-size:clamp(1.6rem,7vw,3rem);font-weight:700;
+            background:linear-gradient(180deg,#c9943a 0%,#8a5010 50%,#5a2e00 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            line-height:1.2;opacity:0;animation:fadeUp 1s 1.2s forwards;letter-spacing:.08em;
+        }
+        .convocatoria{
+            text-align:center;font-family:'Cinzel Decorative',cursive;
+            font-size:clamp(1.2rem,5vw,3rem);font-weight:550;
+            background:linear-gradient(180deg,#c9943a 0%,#8a5010 50%,#5a2e00 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            line-height:1.2;letter-spacing:.08em;
+        }
+        .subtitle{
+            font-family:'IM Fell English',serif;font-style:italic;
+            font-size:clamp(1rem,4vw,1.4rem);color:#8b0000;
+            opacity:0;animation:fadeUp 1s 1.4s forwards;margin:.8rem 0 .3rem;letter-spacing:.05em;
+        }
+
+        /* ── SEPARADORES ── */
         .gold-separator{position:relative;z-index:1;display:flex;align-items:center;gap:1.2rem;padding:0 2rem;margin:.5rem auto;max-width:500px}
         .gs-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,#8a5010,#c9943a,#8a5010)}
         .gs-center{color:#8a5010;font-size:1rem;display:flex;gap:.6rem}
+
+        /* ── CONTENIDO ── */
         .page-content{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 1.2rem 6rem}
-        .section-card{position:relative;margin:1rem 0;background:linear-gradient(160deg,rgba(253,240,216,.97) 0%,rgba(253,245,224,.99) 100%);border:1px solid rgba(138,80,16,.3);border-radius:4px;padding:2rem 1.8rem;box-shadow:0 0 0 1px rgba(201,148,58,.12),0 6px 30px rgba(90,46,0,.12),inset 0 1px 0 rgba(201,148,58,.2);overflow:hidden}
-        .section-card::before,.section-card::after{content:'✦';position:absolute;color:#c9943a;font-size:.8rem;opacity:.5}
+
+        /* ── CARDS — content-visibility para las que están fuera de pantalla ── */
+        .section-card{
+            position:relative;margin:1rem 0;
+            background:linear-gradient(160deg,rgba(253,240,216,.97) 0%,rgba(253,245,224,.99) 100%);
+            border:1px solid rgba(138,80,16,.3);border-radius:4px;
+            padding:2rem 1.8rem;
+            box-shadow:0 0 0 1px rgba(201,148,58,.1),0 4px 20px rgba(90,46,0,.1),inset 0 1px 0 rgba(201,148,58,.15);
+            overflow:hidden;
+            content-visibility:auto;
+            contain-intrinsic-size:auto 300px;
+        }
+        .section-card::before,.section-card::after{content:'✦';position:absolute;color:#c9943a;font-size:.8rem;opacity:.45}
         .section-card::before{top:8px;left:12px}.section-card::after{bottom:8px;right:12px}
         .card-top-bar{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#8a5010,#c9943a,#8a5010,transparent)}
-        .card-icon{width:52px;height:52px;border-radius:50%;background:radial-gradient(circle,rgba(201,148,58,.18) 0%,rgba(139,0,0,.1) 100%);border:1px solid rgba(138,80,16,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 16px rgba(201,148,58,.15);flex-shrink:0}
+        .card-icon{width:52px;height:52px;border-radius:50%;background:rgba(201,148,58,.15);border:1px solid rgba(138,80,16,.25);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
         .card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem}
         .card-title{font-family:'Cinzel',serif;font-size:1rem;color:#5a2e00;letter-spacing:.08em;font-weight:600}
         .card-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#8b0000;font-weight:600;margin-top:.2rem}
+
         .detail-row{display:flex;align-items:flex-start;gap:1rem;padding:.8rem 0;border-bottom:1px solid rgba(138,80,16,.1)}
-        .detail-row:last-child{border-bottom:none;padding-bottom:0}
+        .detail-row:last-of-type{border-bottom:none;padding-bottom:0}
         .dr-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#8a5010;min-width:55px;padding-top:4px;flex-shrink:0}
         .dr-value{font-family:'IM Fell English',serif;font-size:1.05rem;color:#3a1800;line-height:1.5}
         .dr-value strong{display:block;color:#5a2e00;font-size:1.1rem}
+
+        /* ── COUNTDOWN ── */
         .countdown-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:.5rem 0}
         .cd-unit{display:flex;flex-direction:column;align-items:center;gap:.3rem}
-        .cd-num{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.6rem,7vw,2.4rem);font-weight:700;background:linear-gradient(180deg,#c9943a 0%,#8a5010 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;width:100%;text-align:center;padding:.6rem 0;background-color:rgba(253,240,216,.9);border:1px solid rgba(138,80,16,.25);border-radius:4px;box-shadow:inset 0 1px 4px rgba(90,46,0,.1),0 0 10px rgba(201,148,58,.12)}
+        .cd-num{
+            font-family:'Cinzel Decorative',cursive;font-size:clamp(1.5rem,6vw,2.2rem);font-weight:700;
+            background:linear-gradient(180deg,#c9943a 0%,#8a5010 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            line-height:1;width:100%;text-align:center;padding:.5rem 0;
+            background-color:rgba(253,240,216,.9);
+            border:1px solid rgba(138,80,16,.22);border-radius:4px;
+        }
         .cd-lbl{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#8a5010}
         .cd-done{font-family:'IM Fell English',serif;font-style:italic;font-size:1.4rem;color:#5a2e00;grid-column:1/-1;text-align:center;padding:.5rem}
-        .map-btn{display:flex;align-items:center;justify-content:center;gap:.7rem;width:100%;margin-top:1.2rem;padding:.9rem 1.5rem;background:linear-gradient(135deg,#8b0000 0%,#5a0010 100%);color:#fdf0d8;border:none;border-radius:3px;font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:none;box-shadow:0 4px 16px rgba(139,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
-        .map-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(253,240,216,.15),transparent);transform:translateX(-100%);transition:transform .6s}
-        .map-btn:hover::before{transform:translateX(100%)}.map-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,0,0,.4)}
-        .map-btn-gold{background:linear-gradient(135deg,#5a2e00 0%,#3a1800 100%);box-shadow:0 4px 16px rgba(90,46,0,.3),inset 0 1px 0 rgba(255,255,255,.1)}
-        .map-btn-gold:hover{box-shadow:0 8px 24px rgba(138,80,16,.4)}
-        /* ── CARRUSEL DE FOTOS ── */
+
+        /* ── BOTÓN MAPA ── */
+        .map-btn{
+            display:flex;align-items:center;justify-content:center;gap:.7rem;
+            width:100%;margin-top:1.2rem;padding:.9rem 1.5rem;
+            background:linear-gradient(135deg,#5a2e00 0%,#3a1800 100%);
+            color:#fdf0d8;border:none;border-radius:3px;
+            font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+            cursor:pointer;text-decoration:none;
+            box-shadow:0 4px 14px rgba(90,46,0,.25);
+            /* transition solo transform, no box-shadow (más rápido) */
+            transition:transform .2s;
+            -webkit-tap-highlight-color:transparent;
+        }
+        .map-btn:active{transform:scale(.98)}
+        @media(hover:hover){.map-btn:hover{transform:translateY(-2px)}}
+
+        /* ── CARRUSEL ── */
         .carousel-section{position:relative;margin:1rem 0;padding:0}
         .carousel-track-wrap{overflow:hidden;border-radius:4px;padding:.5rem 0}
-        .carousel-track{display:flex;gap:1.4rem;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform;padding:.8rem .2rem}
+        .carousel-track{display:flex;gap:1.4rem;transition:transform .5s cubic-bezier(.4,0,.2,1);padding:.8rem .2rem;will-change:transform}
         .photo-card{
             flex-shrink:0;width:min(230px,72vw);
             background:linear-gradient(160deg,#fdf5e0 0%,#fef8ec 100%);
-            border-radius:6px;border:1px solid rgba(138,80,16,.3);
-            box-shadow:0 0 0 1px rgba(201,148,58,.1),0 6px 24px rgba(90,46,0,.12),inset 0 1px 0 rgba(201,148,58,.2);
-            padding:1rem 1rem .9rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;position:relative;overflow:hidden;
+            border-radius:6px;border:1px solid rgba(138,80,16,.28);
+            box-shadow:0 4px 16px rgba(90,46,0,.1);
+            padding:1rem 1rem .9rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;
+            position:relative;overflow:hidden;
         }
-        .photo-card::before,.photo-card::after{content:'✦';position:absolute;color:rgba(138,80,16,.35);font-size:.7rem}
+        .photo-card::before,.photo-card::after{content:'✦';position:absolute;color:rgba(138,80,16,.3);font-size:.7rem}
         .photo-card::before{top:6px;left:10px}.photo-card::after{bottom:6px;right:10px}
         .photo-card-bar{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#8a5010,#c9943a,#8a5010,transparent)}
         .photo-caption{font-family:'IM Fell English',serif;font-style:italic;font-size:.88rem;color:#3a1800;text-align:center;line-height:1.4;padding:0 .2rem}
         .photo-caption em{color:#8a5010;font-style:normal;display:block;font-size:.75rem;margin-top:.15rem;opacity:.85}
-        .carousel-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(138,80,16,.35);background:rgba(253,240,216,.8);color:#5a2e00;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .2s;box-shadow:0 2px 8px rgba(90,46,0,.12)}
-        .carousel-btn:hover{background:rgba(201,148,58,.15);border-color:#8a5010;transform:scale(1.1)}
-        .cdot{width:6px;height:6px;border-radius:50%;background:rgba(138,80,16,.25);cursor:pointer;transition:all .3s}
+
+        .carousel-btn{
+            width:40px;height:40px;border-radius:50%;
+            border:1px solid rgba(138,80,16,.3);
+            background:rgba(253,240,216,.9);color:#5a2e00;
+            display:flex;align-items:center;justify-content:center;
+            cursor:pointer;font-size:1.1rem;
+            box-shadow:0 2px 8px rgba(90,46,0,.1);
+            -webkit-tap-highlight-color:transparent;
+            /* Área táctil mínima 44px */
+            min-width:44px;min-height:44px;
+        }
+        .cdot{width:8px;height:8px;border-radius:50%;background:rgba(138,80,16,.22);cursor:pointer;transition:all .25s}
         .cdot.active{background:#8a5010;transform:scale(1.3)}
-        .bell-section{text-align:center;padding:3rem 1.5rem;position:relative;z-index:1}
-        .bell-icon{font-size:4rem;display:block;margin-bottom:1.2rem;animation:bellGlow 3s ease-in-out infinite}
-        @keyframes bellGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(139,0,0,.3));transform:scale(1) rotate(-3deg)}50%{filter:drop-shadow(0 0 18px rgba(139,0,0,.5));transform:scale(1.06) rotate(3deg)}}
-        .bell-quote{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(1rem,4vw,1.3rem);color:#3a1800;line-height:2;max-width:380px;margin:0 auto .8rem}
-        .bell-quote em{color:#8a5010;font-style:normal}
-        .bell-verse{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.3em;color:#8a5010}
-        .bottom-bar{position:relative;z-index:1;height:6px;background:linear-gradient(90deg,transparent,#8a5010,#c9943a,#8a5010,#c9943a,#8a5010,transparent)}
-        .music-btn{position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;width:52px;height:52px;border-radius:50%;background:radial-gradient(circle,#c9943a 0%,#8a5010 100%);border:1px solid #f0c060;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 16px rgba(138,80,16,.4);animation:musicPulse 2.5s ease-in-out infinite;transition:transform .3s}
-        .music-btn:hover{transform:scale(1.1)}
-        @keyframes musicPulse{0%,100%{box-shadow:0 4px 16px rgba(138,80,16,.4),0 0 0 0 rgba(201,148,58,.2)}50%{box-shadow:0 4px 24px rgba(138,80,16,.55),0 0 0 8px rgba(201,148,58,0)}}
-        .music-btn.playing{animation:musicSpin 3s linear infinite}
-        @keyframes musicSpin{to{transform:rotate(360deg)}}
-        .section-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:#8b0000;text-align:center;margin:2rem 0 .3rem;opacity:.85}
-        .candle-float{font-size:2rem;display:inline-block;animation:candleFlicker 1.8s ease-in-out infinite alternate}
-        @keyframes candleFlicker{0%{filter:drop-shadow(0 0 6px rgba(201,148,58,.5))}100%{filter:drop-shadow(0 0 14px rgba(201,148,58,.8))}}
-        .roses-row{display:flex;justify-content:center;gap:.5rem;margin:.8rem 0;font-size:1.2rem}
-        .intro-text{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(.95rem,3.5vw,1.15rem);color:#4a2200;text-align:center;line-height:1.9;margin:.5rem 0}
-        .gp-name{font-family:'IM Fell English',serif;font-style:italic;font-size:.88rem;color:#3a1800;line-height:1.5;padding:.5rem .8rem;background:rgba(201,148,58,.08);border:1px solid rgba(138,80,16,.15);border-radius:3px;display:flex;align-items:center;gap:.5rem}
-        .gp-name::before{content:'🌹';font-size:.75rem;flex-shrink:0}
-        .sched-time{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.05em;color:#8a5010;text-align:right;padding-top:3px;line-height:1.3}
-        .sched-dot{width:10px;height:10px;border-radius:50%;background:#8b0000;border:2px solid rgba(138,80,16,.4);margin-top:4px;flex-shrink:0;box-shadow:0 0 6px rgba(139,0,0,.3)}
-        .sched-dot.gold{background:#c9943a;border-color:#f0c060;box-shadow:0 0 8px rgba(201,148,58,.5)}
-        .sched-desc{font-family:'IM Fell English',serif;font-size:.92rem;color:#3a1800;line-height:1.5;padding-top:1px}
-        .sched-desc strong{display:block;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.08em;color:#5a2e00;font-weight:600;margin-bottom:.15rem}
-        .curio-item{display:flex;align-items:flex-start;gap:.9rem;padding:.8rem .9rem;background:rgba(255,248,230,.85);border:1px solid rgba(138,80,16,.2);border-radius:4px;position:relative;overflow:hidden}
-        .curio-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#8a5010,#c9943a,#8a5010)}
-        .curio-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem}
-        .curio-text{font-family:'IM Fell English',serif;font-size:.92rem;color:#2a1000;line-height:1.7}
-        .curio-text strong{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;color:#5a2e00;display:block;margin-bottom:.25rem;font-weight:700}
-        /* Marco dorado de la foto */
+        .carousel-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem}
+        .carousel-dots{display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;justify-content:center;max-width:200px}
+
+        /* ── MARCO DORADO ── */
         .photo-frame{
-            position:relative;width:100%;
-            padding-bottom:100%;/* cuadrado */
-            border-radius:3px;
+            position:relative;width:100%;padding-bottom:100%;
             background:linear-gradient(145deg,#2d1500,#5c2e00,#c9943a,#f0c060,#ffe090,#f0c060,#c9943a,#5c2e00,#2d1500);
-            padding:3px;
-            box-shadow:inset 0 0 0 1px rgba(255,240,160,.4),0 0 20px rgba(201,148,58,.25);
+            padding:3px;border-radius:3px;
         }
-        .photo-frame::before{
-            content:'';position:absolute;inset:3px;
-            border:1px solid rgba(255,224,100,.25);
-            border-radius:2px;z-index:2;pointer-events:none;
-        }
-        .photo-inner{
-            position:static;
-            inset:3px;
-            background:#0d0400;
-            border-radius:2px;overflow:hidden;
-        }
-        .photo-inner img{
-            width:100%;height:100%;object-fit:cover;
-            display:block;transition:transform .5s ease;
-        }
-        .photo-card:hover .photo-inner img{transform:scale(1.06)}
-        /* Esquinas decorativas del marco */
+        .photo-inner{position:absolute;inset:3px;background:#0d0400;border-radius:2px;overflow:hidden}
+        .photo-inner img{width:100%;height:100%;object-fit:cover;display:block}
+        /* Hover sólo en desktop */
+        @media(hover:hover){.photo-card:hover .photo-inner img{transform:scale(1.05);transition:transform .4s ease}}
         .frame-corner{position:absolute;width:14px;height:14px;z-index:3;pointer-events:none}
         .frame-corner svg{width:100%;height:100%}
         .fc-tl{top:3px;left:3px}.fc-tr{top:3px;right:3px;transform:scaleX(-1)}
         .fc-bl{bottom:3px;left:3px;transform:scaleY(-1)}.fc-br{bottom:3px;right:3px;transform:scale(-1,-1)}
-        /* Número de foto */
-        .photo-num{
-            position:absolute;top:7px;right:7px;z-index:4;
-            width:18px;height:18px;border-radius:50%;
-            background:rgba(201,148,58,.85);
-            display:flex;align-items:center;justify-content:center;
-            font-family:'Cinzel',serif;font-size:.55rem;color:#1a0800;font-weight:700;
-        }
-        /* controles carrusel */
-        .carousel-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem}
-        .carousel-dots{display:flex;gap:.4rem;align-items:center}
-        .reveal{opacity:0;transform:translateY(35px);transition:opacity 1s ease,transform 1s ease}
-        .reveal.in{opacity:1;transform:translateY(0)}.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.22s}.reveal.d3{transition-delay:.34s}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes scaleIn{from{opacity:0;transform:scale(.5) rotate(-5deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @media(max-width:380px){.gp-grid{grid-template-columns:1fr}}
+        .photo-num{position:absolute;top:7px;right:7px;z-index:4;width:18px;height:18px;border-radius:50%;background:rgba(201,148,58,.85);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.55rem;color:#1a0800;font-weight:700}
 
-        /* ═══════════════════════════════
-           LIBRO GRIMORIO MÁGICO
-        ═══════════════════════════════ */
-        #book-overlay{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;
+        /* ── SECCIÓN CURIOSIDADES ── */
+        .curio-item{display:flex;align-items:flex-start;gap:.9rem;padding:.8rem .9rem;background:rgba(255,248,230,.85);border:1px solid rgba(138,80,16,.18);border-radius:4px;position:relative;overflow:hidden;margin-bottom:.7rem}
+        .curio-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#8a5010,#c9943a,#8a5010)}
+        .curio-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem}
+        .curio-text{font-family:'IM Fell English',serif;font-size:.92rem;color:#2a1000;line-height:1.7}
+        .curio-text strong{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;color:#5a2e00;display:block;margin-bottom:.25rem;font-weight:700}
+
+        /* ── CRONOGRAMA ── */
+        .sched-wrap{position:relative;padding:.4rem 0 .2rem}
+        .sched-wrap::before{content:'';position:absolute;left:74px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(201,148,58,.3) 10%,rgba(201,148,58,.3) 90%,transparent)}
+        .sched-item{display:grid;grid-template-columns:64px 20px 1fr;align-items:flex-start;gap:0 .6rem;padding:.65rem 0}
+        .sched-time{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.05em;color:#5a2e00;text-align:right;padding-top:3px;line-height:1.3}
+        .sched-dot{width:10px;height:10px;border-radius:50%;background:#8b0000;border:2px solid rgba(201,148,58,.45);margin-top:4px;flex-shrink:0}
+        .sched-dot.gold{background:#c9943a;border-color:#f0c060}
+        .sched-desc{font-family:'IM Fell English',serif;font-size:.92rem;color:#3a1800;line-height:1.5;padding-top:1px}
+        .sched-desc strong{display:block;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.08em;color:#5a2e00;font-weight:600;margin-bottom:.15rem}
+
+        /* ── BELL / CIERRE ── */
+        .bell-section{text-align:center;padding:3rem 1.5rem;position:relative;z-index:1}
+        .bell-icon{font-size:3.5rem;display:block;margin-bottom:1.2rem;animation:bellGlow 3s ease-in-out infinite}
+        @keyframes bellGlow{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.05) rotate(3deg)}}
+        .bell-quote{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(1rem,4vw,1.3rem);color:#3a1800;line-height:2;max-width:380px;margin:0 auto .8rem}
+        .bell-quote em{color:#8a5010;font-style:normal}
+        .bell-verse{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.3em;color:#8a5010}
+        .roses-row{display:flex;justify-content:center;gap:.5rem;margin:.8rem 0;font-size:1.2rem}
+        .candle-float{font-size:2rem;display:inline-block;animation:candleFlicker 1.8s ease-in-out infinite alternate}
+        @keyframes candleFlicker{0%{filter:drop-shadow(0 0 4px rgba(201,148,58,.4))}100%{filter:drop-shadow(0 0 10px rgba(201,148,58,.7))}}
+        @media(max-width:480px){.candle-float{filter:none;animation:none}}
+
+        .section-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:#8b0000;text-align:center;margin:2rem 0 .3rem;opacity:.85}
+        .intro-text{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(.95rem,3.5vw,1.15rem);color:#4a2200;text-align:center;line-height:1.9;margin:.5rem 0}
+        .bottom-bar{height:6px;background:linear-gradient(90deg,transparent,#8a5010,#c9943a,#8a5010,#c9943a,#8a5010,transparent)}
+
+        /* ── BOTÓN MÚSICA ── */
+        .music-btn{
+            position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;
+            width:52px;height:52px;border-radius:50%;
+            background:radial-gradient(circle,#c9943a 0%,#8a5010 100%);
+            border:1px solid #f0c060;display:flex;align-items:center;justify-content:center;
+            font-size:1.3rem;cursor:pointer;
+            box-shadow:0 4px 16px rgba(138,80,16,.35);
+            animation:musicPulse 2.5s ease-in-out infinite;
+            -webkit-tap-highlight-color:transparent;will-change:box-shadow;
+        }
+        @keyframes musicPulse{0%,100%{box-shadow:0 4px 16px rgba(138,80,16,.35),0 0 0 0 rgba(201,148,58,.18)}50%{box-shadow:0 4px 22px rgba(138,80,16,.5),0 0 0 8px rgba(201,148,58,0)}}
+        .music-btn.playing{animation:musicSpin 3s linear infinite}
+        @keyframes musicSpin{to{transform:rotate(360deg)}}
+
+        /* ── REVEAL SCROLL ── */
+        .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+        .reveal.in{opacity:1;transform:translateY(0)}
+        .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+
+        /* ── ANIMACIONES BASE ── */
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes scaleIn{from{opacity:0;transform:scale(.55) rotate(-4deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
+
+        /* ─────────────────────────────────
+           LIBRO MÁGICO
+        ───────────────────────────────── */
+        #book-overlay{
+            position:fixed;inset:0;z-index:9999;
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
             background:radial-gradient(ellipse 120% 90% at 50% 40%,#fef0c8 0%,#f5dea0 35%,#e8c878 65%,#c9943a 100%);
-            overflow:hidden}
+            overflow:hidden;
+        }
+        /* Estrellas fondo libro */
         .bk-stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
         .bk-star{position:absolute;border-radius:50%;animation:bkTwinkle ease-in-out infinite}
-        @keyframes bkTwinkle{0%,100%{opacity:.1;transform:scale(.5)}50%{opacity:.9;transform:scale(1.4)}}
-        .bk-sparkle{position:absolute;pointer-events:none;border-radius:50%;background:#8a5010;animation:bkSparkle ease-in-out infinite;box-shadow:0 0 5px 2px rgba(138,80,16,.5)}
-        @keyframes bkSparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:.8;transform:scale(1)}}
-        .overlay-tagline{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(.75rem,3vw,1rem);color:rgba(90,46,0,.75);letter-spacing:.2em;margin-bottom:1.2rem;animation:taglinePulse 3s ease-in-out infinite;position:relative;z-index:3}
-        @keyframes taglinePulse{0%,100%{opacity:.55}50%{opacity:1}}
+        @keyframes bkTwinkle{0%,100%{opacity:.1;transform:scale(.5)}50%{opacity:.85;transform:scale(1.3)}}
 
-        .book-aura{position:absolute;width:min(360px,94vw);height:min(450px,118vw);border-radius:50%;background:radial-gradient(ellipse,rgba(138,80,16,.25) 0%,rgba(139,0,0,.1) 40%,transparent 70%);animation:auraBreath 3s ease-in-out infinite;pointer-events:none;z-index:1;filter:blur(22px)}
-        @keyframes auraBreath{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.18);opacity:.9}}
+        .overlay-tagline{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(.75rem,3vw,1rem);color:rgba(90,46,0,.75);letter-spacing:.2em;margin-bottom:1.2rem;animation:taglinePulse 3s ease-in-out infinite;position:relative;z-index:3}
+        @keyframes taglinePulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+        .book-aura{position:absolute;width:min(360px,94vw);height:min(450px,118vw);border-radius:50%;background:radial-gradient(ellipse,rgba(138,80,16,.2) 0%,rgba(139,0,0,.08) 40%,transparent 70%);animation:auraBreath 3s ease-in-out infinite;pointer-events:none;z-index:1;filter:blur(18px)}
+        @keyframes auraBreath{0%,100%{transform:scale(1);opacity:.45}50%{transform:scale(1.15);opacity:.85}}
+        @media(max-width:480px){.book-aura{filter:blur(10px)}}
+
+        /* Anillos de runas */
         .rune-ring-outer{position:absolute;width:min(330px,88vw);height:min(415px,110vw);animation:runeOuter 22s linear infinite;pointer-events:none;z-index:1}
         .rune-ring-inner2{position:absolute;width:min(295px,78vw);height:min(375px,99vw);animation:runeInner 15s linear infinite;pointer-events:none;z-index:1}
         @keyframes runeOuter{to{transform:rotate(360deg)}}
         @keyframes runeInner{to{transform:rotate(-360deg)}}
-        .book-cta-text{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(.72rem,2.8vw,.9rem);color:rgba(90,46,0,.65);letter-spacing:.12em;animation:ctaPulse 2.2s ease-in-out infinite;transition:opacity .4s}
-        .book-cta-text.hide{opacity:0}
-        .book-cta-arrow{font-size:1.1rem;color:rgba(90,46,0,.7);animation:ctaBounce 1.8s ease-in-out infinite}
 
-        .book-scene{perspective:1400px;position:relative;z-index:2;cursor:pointer}
-        .book-3d{position:relative;width:min(220px,58vw);height:min(290px,76vw);transform-style:preserve-3d;animation:bookIdle 4s ease-in-out infinite;filter:drop-shadow(0 30px 60px rgba(0,0,0,.9)) drop-shadow(0 0 50px rgba(201,148,58,.4))}
-        .book-scene:hover .book-3d{filter:drop-shadow(0 30px 60px rgba(0,0,0,.9)) drop-shadow(0 0 80px rgba(240,192,96,.65)) drop-shadow(0 0 120px rgba(201,148,58,.3))}
-        @keyframes bookIdle{0%,100%{transform:rotateY(-8deg) rotateX(3deg) translateY(0)}50%{transform:rotateY(-8deg) rotateX(3deg) translateY(-16px)}}
+        /* Libro 3D */
+        .book-scene{perspective:1400px;position:relative;z-index:2;cursor:pointer;-webkit-tap-highlight-color:transparent}
+        .book-3d{
+            position:relative;width:min(220px,58vw);height:min(290px,76vw);
+            transform-style:preserve-3d;
+            animation:bookIdle 4s ease-in-out infinite;
+            filter:drop-shadow(0 25px 45px rgba(0,0,0,.75)) drop-shadow(0 0 35px rgba(201,148,58,.3));
+            will-change:transform,filter;
+        }
+        @keyframes bookIdle{0%,100%{transform:rotateY(-8deg) rotateX(3deg) translateY(0)}50%{transform:rotateY(-8deg) rotateX(3deg) translateY(-14px)}}
         .book-3d.opening{animation:none!important}
         .book-front{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;backface-visibility:hidden}
         .book-3d.opening .book-front{animation:coverFlip 1.4s .2s cubic-bezier(.6,0,.4,1) forwards}
         @keyframes coverFlip{0%{transform:rotateY(0deg)}100%{transform:rotateY(-165deg)}}
 
-        /* CUBIERTA GRIMORIO DORADO */
         .cover-face{
             position:absolute;inset:0;backface-visibility:hidden;
             background:linear-gradient(160deg,#2d1500 0%,#5c2e00 7%,#8b4a10 14%,#c9943a 26%,#f0c060 40%,#ffe8a0 50%,#f5d060 60%,#c9943a 74%,#8b4a10 86%,#5c2e00 93%,#2d1500 100%);
             border-radius:3px 18px 18px 3px;
             border:3px solid #ffe090;
-            box-shadow:inset 0 0 0 1.5px rgba(255,240,160,.65),inset 0 0 0 5px rgba(80,35,0,.85),inset 0 0 0 6.5px rgba(240,192,96,.45),inset -6px 0 20px rgba(0,0,0,.55),inset 0 0 70px rgba(80,35,0,.75),0 0 50px rgba(201,148,58,.4);
+            box-shadow:inset 0 0 0 1.5px rgba(255,240,160,.6),inset 0 0 0 5px rgba(80,35,0,.8),inset 0 0 0 6.5px rgba(240,192,96,.4),inset -6px 0 18px rgba(0,0,0,.5),inset 0 0 60px rgba(80,35,0,.7);
             overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1rem .8rem .9rem;
         }
-        .cover-face::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 2px,rgba(255,255,255,.028) 2px,rgba(255,255,255,.028) 4px),repeating-linear-gradient(-45deg,transparent,transparent 3px,rgba(0,0,0,.045) 3px,rgba(0,0,0,.045) 6px);border-radius:inherit}
-        /* Brillo recorriendo el libro */
-        .cover-sheen{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(130deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.2) 42%,rgba(255,248,180,.34) 50%,rgba(255,255,255,.1) 58%,rgba(255,255,255,0) 100%);pointer-events:none;animation:sheenMove 3.5s ease-in-out infinite}
+        .cover-sheen{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(130deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.18) 42%,rgba(255,248,180,.3) 50%,rgba(255,255,255,.1) 58%,rgba(255,255,255,0) 100%);pointer-events:none;animation:sheenMove 3.5s ease-in-out infinite}
         @keyframes sheenMove{0%{opacity:0;transform:translateX(-130%) skewX(-15deg)}38%{opacity:1}72%{opacity:0;transform:translateX(130%) skewX(-15deg)}100%{opacity:0;transform:translateX(130%) skewX(-15deg)}}
-        /* Pulso dorado */
-        .cover-pulse{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(255,224,100,.1) 0%,transparent 70%);animation:coverPulse 2.5s ease-in-out infinite}
-        @keyframes coverPulse{0%,100%{opacity:.4}50%{opacity:1}}
-        /* Partículas mágicas en la cubierta */
-        .cover-magic{position:absolute;inset:0;border-radius:inherit;pointer-events:none;overflow:hidden}
-
         .cover-back-face{position:absolute;inset:0;transform:rotateY(180deg);backface-visibility:hidden;background:linear-gradient(160deg,#f8f0d8 0%,#f0e4c0 100%);border-radius:3px 18px 18px 3px;border:2px solid rgba(201,148,58,.3)}
-        .book-spine{position:absolute;top:0;left:-20px;width:22px;height:100%;transform-origin:right center;transform:rotateY(90deg) translateZ(-1px);background:linear-gradient(180deg,#2d1500 0%,#8b4a10 8%,#c9943a 18%,#f0c060 30%,#ffe090 38%,#f0c060 46%,#c9943a 56%,#f0c060 68%,#c9943a 80%,#8b4a10 92%,#2d1500 100%);border-radius:4px 0 0 4px;box-shadow:inset -3px 0 8px rgba(0,0,0,.5),inset 2px 0 5px rgba(255,224,144,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-        .spine-text{writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.15em;color:#2d1500;font-weight:600;opacity:.9}
+        .book-spine{position:absolute;top:0;left:-20px;width:22px;height:100%;transform-origin:right center;transform:rotateY(90deg) translateZ(-1px);background:linear-gradient(180deg,#2d1500 0%,#8b4a10 8%,#c9943a 18%,#f0c060 30%,#ffe090 38%,#f0c060 46%,#c9943a 56%,#f0c060 68%,#c9943a 80%,#8b4a10 92%,#2d1500 100%);border-radius:4px 0 0 4px;box-shadow:inset -3px 0 8px rgba(0,0,0,.45),inset 2px 0 5px rgba(255,224,144,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+        .spine-text{writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);font-family:'Cinzel',serif;font-size:.38rem;letter-spacing:.15em;color:#2d1500;font-weight:600}
         .spine-ornament{font-size:.5rem;color:#2d1500;opacity:.8}
-        .book-pages-side{position:absolute;top:3px;right:-12px;width:14px;height:calc(100% - 6px);transform:rotateY(-90deg) translateZ(-1px);background:repeating-linear-gradient(180deg,#f8f0d8 0px,#f8f0d8 1.5px,#e0d0a8 1.5px,#e0d0a8 2.5px);border-radius:0 2px 2px 0;box-shadow:inset 3px 0 8px rgba(0,0,0,.15)}
+        .book-pages-side{position:absolute;top:3px;right:-12px;width:14px;height:calc(100% - 6px);transform:rotateY(-90deg) translateZ(-1px);background:repeating-linear-gradient(180deg,#f8f0d8 0px,#f8f0d8 1.5px,#e0d0a8 1.5px,#e0d0a8 2.5px);border-radius:0 2px 2px 0}
         .book-back{position:absolute;inset:0;transform:rotateY(180deg);backface-visibility:hidden;background:linear-gradient(160deg,#5c3300 0%,#8b5010 15%,#c9943a 40%,#8b5010 70%,#5c3300 100%);border-radius:3px 18px 18px 3px;border:3px solid #c9943a}
         .book-pages-inner{position:absolute;inset:0;background:linear-gradient(160deg,#fff8e8 0%,#f8f0d8 100%);border-radius:3px 18px 18px 3px;border:1px solid rgba(201,148,58,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.2rem 1rem;z-index:-1;opacity:0;pointer-events:none}
         .book-3d.opening .book-pages-inner{animation:pagesShow .4s .9s ease forwards;z-index:1}
         @keyframes pagesShow{to{opacity:1}}
         .inner-ornament{font-size:.7rem;color:var(--gold-deep);margin-bottom:.5rem;letter-spacing:.3em}
-        .inner-rose{font-size:2.2rem;display:block;margin-bottom:.4rem;filter:drop-shadow(0 2px 8px rgba(139,0,0,.4))}
+        .inner-rose{font-size:2.2rem;display:block;margin-bottom:.4rem}
         .inner-name{font-family:'Cinzel Decorative',cursive;font-size:1rem;font-weight:700;background:linear-gradient(180deg,#f0c060 0%,#c9943a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;line-height:1.3}
         .inner-sub{font-family:'IM Fell English',serif;font-style:italic;font-size:.6rem;color:var(--crimson);margin-top:.3rem;text-align:center}
         .inner-divider{width:80%;height:1px;margin:.6rem auto;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-        .cover-oval{width:110px;height:118px;position:relative;flex-shrink:0}.cover-oval svg{width:100%;height:100%}
+
+        .cover-oval{width:110px;height:118px;position:relative;flex-shrink:0}
+        .cover-oval svg{width:100%;height:100%}
         .cover-titles{text-align:center}
-        .cover-title-main{font-family:'Cinzel Decorative',cursive;font-size:clamp(1rem,4.5vw,1.35rem);font-weight:900;background:linear-gradient(180deg,#1a0800 0%,#3d1e00 50%,#1a0800 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 1px 0 rgba(255,220,100,.25));line-height:1;letter-spacing:.04em}
+        .cover-title-main{font-family:'Cinzel Decorative',cursive;font-size:clamp(1rem,4.5vw,1.35rem);font-weight:900;background:linear-gradient(180deg,#1a0800 0%,#3d1e00 50%,#1a0800 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;letter-spacing:.04em}
         .cover-title-sub{font-family:'Cinzel Decorative',cursive;font-size:clamp(.65rem,3vw,.9rem);font-weight:700;background:linear-gradient(180deg,#2d1400 0%,#4a2200 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.4;letter-spacing:.06em}
         .cover-caption{font-family:'IM Fell English',serif;font-style:italic;font-size:.54rem;color:rgba(30,12,0,.75);letter-spacing:.18em;margin-top:.2rem}
         .cover-rule{width:100%;height:14px}.cover-rule svg{width:100%;height:100%}
@@ -294,83 +396,54 @@
         .book-3d.opening .magic-burst{animation:magicPop 1.2s .6s ease forwards}
         @keyframes magicPop{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
         .book-cta{margin-top:1.5rem;position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:.4rem}
-        .book-cta-text{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(.72rem,2.8vw,.9rem);color:rgba(240,192,96,.55);letter-spacing:.12em;animation:ctaPulse 2.2s ease-in-out infinite;transition:opacity .4s}
+        .book-cta-text{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(.72rem,2.8vw,.9rem);color:rgba(90,46,0,.65);letter-spacing:.12em;animation:ctaPulse 2.2s ease-in-out infinite;transition:opacity .4s}
         .book-cta-text.hide{opacity:0}
-        @keyframes ctaPulse{0%,100%{opacity:.4}50%{opacity:.9}}
-        .book-cta-arrow{font-size:1.1rem;animation:ctaBounce 1.8s ease-in-out infinite}
+        @keyframes ctaPulse{0%,100%{opacity:.38}50%{opacity:.88}}
+        .book-cta-arrow{font-size:1.1rem;color:rgba(90,46,0,.65);animation:ctaBounce 1.8s ease-in-out infinite}
         @keyframes ctaBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
-        /* ═══════════════════════════════
-           CASTILLO — COMPLETO, SIN RECORTE
-        ═══════════════════════════════ */
+        /* ─────────────────────────────────
+           CASTILLO
+        ───────────────────────────────── */
         #castle-transition{
             position:fixed;inset:0;z-index:10000;
             pointer-events:none;opacity:0;
             display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-            /* sin overflow:hidden */
         }
         #castle-transition.show{animation:castleFullReveal 10s ease forwards}
         @keyframes castleFullReveal{0%{opacity:0}6%{opacity:1}84%{opacity:1}100%{opacity:0}}
-        .castle-sky{position:absolute;inset:0;background:
-                radial-gradient(ellipse 80% 55% at 50% 0%,#f5d878 0%,#e8a830 25%,#c97820 50%,#8b4500 75%,#4a1e00 100%),
-                linear-gradient(180deg,#f0c040 0%,#c87818 30%,#8b4500 60%,#3a1800 100%)}
-        /* Luna en esquina superior derecha, lejos del texto central */
-        .castle-moon{position:absolute;top:6%;right:8%;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,#fff8d0 0%,#f0c060 50%,#c9943a 100%);box-shadow:0 0 60px 25px rgba(240,192,96,.5),0 0 110px 45px rgba(201,148,58,.22);animation:moonPulse 2s ease-in-out infinite}
-        .castle-moon::after{content:'';position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,transparent 38px,rgba(240,192,96,.1) 55px,transparent 80px);animation:moonHalo 4s ease-in-out infinite}
-        @keyframes moonHalo{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.35);opacity:1}}
-        @keyframes moonPulse{0%,100%{box-shadow:0 0 70px 30px rgba(240,192,96,.5),0 0 130px 55px rgba(201,148,58,.2)}50%{box-shadow:0 0 90px 40px rgba(240,192,96,.7),0 0 180px 75px rgba(201,148,58,.35)}}
+        .castle-sky{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 0%,#f5d878 0%,#e8a830 25%,#c97820 50%,#8b4500 75%,#4a1e00 100%),linear-gradient(180deg,#f0c040 0%,#c87818 30%,#8b4500 60%,#3a1800 100%)}
+        .castle-moon{position:absolute;top:6%;right:8%;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,#fff8d0 0%,#f0c060 50%,#c9943a 100%);box-shadow:0 0 50px 20px rgba(240,192,96,.45);animation:moonPulse 2s ease-in-out infinite}
+        @keyframes moonPulse{0%,100%{box-shadow:0 0 50px 20px rgba(240,192,96,.45)}50%{box-shadow:0 0 75px 35px rgba(240,192,96,.65)}}
         .c-stars{position:absolute;inset:0;overflow:hidden}
         .c-star{position:absolute;border-radius:50%;animation:cStarTwinkle ease-in-out infinite}
-        @keyframes cStarTwinkle{0%,100%{opacity:.1}50%{opacity:.9}}
-        .castle-mist{position:absolute;bottom:0;left:0;right:0;height:210px;z-index:3;background:linear-gradient(0deg,rgba(200,120,20,.55) 0%,rgba(180,100,10,.25) 50%,transparent 100%);animation:mistMove 5s ease-in-out infinite alternate}
-        @keyframes mistMove{from{opacity:.6;transform:scaleX(1)}to{opacity:.9;transform:scaleX(1.04)}}
-        .castle-magic-dots{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-        .cmd{position:absolute;border-radius:50%;animation:cmdFloat ease-in-out infinite}
-        @keyframes cmdFloat{0%{transform:translateY(0) scale(1);opacity:0}15%{opacity:1}85%{opacity:.6}100%{transform:translateY(-80px) scale(2);opacity:0}}
-        /* El wrap tiene padding-top para que el SVG no quede cortado arriba */
-        .castle-svg-wrap{
-            position:relative;z-index:2;width:100%;
-            padding-top:60px; /* espacio para banderas y rosa de la cima */
-            animation:castleRise 1.8s .4s cubic-bezier(.25,.46,.45,.94) both;
-        }
-        @keyframes castleRise{from{transform:translateY(150px);opacity:0}to{transform:translateY(0);opacity:1}}
-        .castle-svg{width:100%;display:block;overflow:visible} /* overflow:visible clave */
+        @keyframes cStarTwinkle{0%,100%{opacity:.1}50%{opacity:.85}}
+        .castle-mist{position:absolute;bottom:0;left:0;right:0;height:180px;z-index:3;background:linear-gradient(0deg,rgba(200,120,20,.5) 0%,rgba(180,100,10,.2) 50%,transparent 100%);animation:mistMove 5s ease-in-out infinite alternate}
+        @keyframes mistMove{from{opacity:.55;transform:scaleX(1)}to{opacity:.85;transform:scaleX(1.04)}}
 
-        /* TEXTO CASTILLO */
-        .castle-story{
-            position:absolute;
-            top:8%; left:0; right:0;
-            text-align:center; z-index:4;
-            padding:0 8%;
-        }
-        .story-line{
-            display:block;
-            font-family:'IM Fell English',serif; font-style:italic;
-            color:rgba(240,220,150,.95);
-            overflow:hidden; white-space:nowrap;
-            margin:0 auto .45rem;
-            opacity:0;
-            text-shadow:0 0 18px rgba(201,148,58,.7),0 2px 8px rgba(0,0,0,.9);
-        }
-        .story-line:nth-child(1){font-size:clamp(1.3rem,5.5vw,2.2rem)}
-        .story-line:nth-child(2),
-        .story-line:nth-child(3),
-        .story-line:nth-child(4){font-size:clamp(.82rem,3.3vw,1.15rem)}
+        .castle-svg-wrap{position:relative;z-index:2;width:100%;padding-top:60px;animation:castleRise 1.8s .4s cubic-bezier(.25,.46,.45,.94) both}
+        @keyframes castleRise{from{transform:translateY(140px);opacity:0}to{transform:translateY(0);opacity:1}}
+        .castle-svg{width:100%;display:block;overflow:visible}
+
+        /* TEXTO CASTILLO — typewriter */
+        .castle-story{position:absolute;top:8%;left:0;right:0;text-align:center;z-index:4;padding:0 8%}
+        .story-line{display:block;font-family:'IM Fell English',serif;font-style:italic;color:rgba(240,220,150,.95);overflow:hidden;white-space:nowrap;margin:0 auto .45rem;opacity:0;text-shadow:0 0 14px rgba(201,148,58,.65),0 2px 6px rgba(0,0,0,.85)}
+        .story-line:nth-child(1){font-size:clamp(1.95rem, 8.25vw, 3.3rem)}
+        .story-line:nth-child(2),.story-line:nth-child(3),.story-line:nth-child(4){font-size:clamp(1.23rem, 4.95vw, 1.725rem)}
         .story-roses{font-size:1.6rem;margin-top:.8rem;opacity:0;text-align:center;display:block}
 
-        /* ── CRONOGRAMA ── */
-        .sched-wrap{position:relative;padding:.4rem 0 .2rem}
-        .sched-wrap::before{content:'';position:absolute;left:74px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(201,148,58,.35) 10%,rgba(201,148,58,.35) 90%,transparent)}
-        .sched-item{display:grid;grid-template-columns:64px 20px 1fr;align-items:flex-start;gap:0 .6rem;padding:.65rem 0;position:relative}
-        .sched-item.last .sched-wrap::before{display:none}
-        .sched-time{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.05em;color:var(--gold-deep);text-align:right;padding-top:3px;line-height:1.3}
-        .sched-dot{width:10px;height:10px;border-radius:50%;background:var(--crimson);border:2px solid rgba(201,148,58,.5);margin-top:4px;flex-shrink:0;box-shadow:0 0 8px rgba(139,0,0,.5)}
-        .sched-dot.gold{background:var(--gold-bright);border-color:var(--gold-shine);box-shadow:0 0 10px rgba(240,192,96,.6)}
-        .sched-desc{font-family:'IM Fell English',serif;font-size:.92rem;color:var(--text-light);line-height:1.5;padding-top:1px}
-        .sched-desc strong{display:block;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.08em;color:#5a2e00;font-weight:600;margin-bottom:.15rem}
-
+        /* Overlay fade */
         #book-overlay.fading{animation:ovFadeOut .9s ease forwards}
         @keyframes ovFadeOut{to{opacity:0;pointer-events:none}}
+
+        /* ── prefers-reduced-motion: apagar todas las animaciones no esenciales ── */
+        @media(prefers-reduced-motion:reduce){
+            .rose-drop,.particle,.sparkle,.bk-star,.c-star,
+            .rune-ring-outer,.rune-ring-inner2,.photo-ring,
+            .rose-deco,.candle-float,.bell-icon{animation:none!important}
+            .book-3d{animation:none!important;transform:rotateY(-8deg) rotateX(3deg)}
+            .reveal{opacity:1!important;transform:none!important}
+        }
     </style>
 </head>
 <body>
@@ -380,8 +453,6 @@
     <div class="castle-sky"></div>
     <div class="castle-moon"></div>
     <div class="c-stars" id="cStars"></div>
-    <div class="castle-magic-dots" id="castleMagic"></div>
-
     <div class="castle-story">
         <span class="story-line">Érase una vez...</span>
         <span class="story-line">En un reino no muy lejano</span>
@@ -389,9 +460,7 @@
         <span class="story-line">que pronto estaría de cumpleaños.</span>
         <div class="story-roses">🌹 ✦ 🌹 ✦ 🌹</div>
     </div>
-
     <div class="castle-svg-wrap">
-        <!-- viewBox ampliado arriba (y=-10) para que las banderas y rosa de la cima sean visibles -->
         <svg class="castle-svg" viewBox="0 -10 800 495" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="wallGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#1a3060"/><stop offset="40%" stop-color="#0f2040"/><stop offset="100%" stop-color="#081428"/></linearGradient>
@@ -400,20 +469,13 @@
                 <linearGradient id="goldEdge" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7a5010"/><stop offset="30%" stop-color="#f0c060"/><stop offset="70%" stop-color="#f0c060"/><stop offset="100%" stop-color="#7a5010"/></linearGradient>
                 <linearGradient id="windowGlow" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffe8a0"/><stop offset="100%" stop-color="#f0b040" stop-opacity=".8"/></linearGradient>
                 <radialGradient id="moonGrad" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#fffce0"/><stop offset="60%" stop-color="#ffe090"/><stop offset="100%" stop-color="#c9943a"/></radialGradient>
-                <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                <filter id="glowStrong" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feColorMatrix in="b" type="matrix" values="1.2 0.8 0 0 0  0.6 0.8 0 0 0  0 0 0.2 0 0  0 0 0 1 0" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                <filter id="roseMagic" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feColorMatrix in="b" type="matrix" values=".9 .4 1 0 0  .4 .5 .8 0 0  1 .6 1.2 0 0  0 0 0 .8 0" result="p"/><feMerge><feMergeNode in="p"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <!-- Filtros simplificados para móvil: sólo glow básico -->
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <filter id="glowStrong" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <filter id="goldGlow" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
             </defs>
-
-            <!-- Suelo / niebla -->
             <rect x="0" y="418" width="800" height="77" fill="#081428" opacity=".9"/>
             <ellipse cx="400" cy="423" rx="420" ry="22" fill="#0f2040" opacity=".7"/>
-            <ellipse cx="200" cy="428" rx="220" ry="28" fill="#1a3060" opacity=".3"/>
-            <ellipse cx="600" cy="428" rx="220" ry="28" fill="#1a3060" opacity=".3"/>
-            <ellipse cx="400" cy="426" rx="280" ry="10" fill="#c9943a" opacity=".05" filter="url(#glow)"/>
-
-            <!-- Muralla -->
             <rect x="80" y="328" width="640" height="157" fill="url(#wallGrad)" rx="3"/>
             <rect x="80" y="328" width="640" height="3" fill="url(#goldEdge)"/>
             <rect x="80" y="311" width="32" height="20" fill="url(#wallGrad)" rx="2"/>
@@ -426,98 +488,64 @@
             <rect x="608" y="311" width="32" height="20" fill="url(#wallGrad)" rx="2"/>
             <rect x="648" y="311" width="32" height="20" fill="url(#wallGrad)" rx="2"/>
             <rect x="688" y="311" width="32" height="20" fill="url(#wallGrad)" rx="2"/>
-            <line x1="80" y1="362" x2="720" y2="362" stroke="#c9943a" stroke-width="1.2" opacity=".35"/>
-            <line x1="80" y1="392" x2="720" y2="392" stroke="#c9943a" stroke-width=".8" opacity=".2"/>
-
-            <!-- Puerta -->
+            <line x1="80" y1="362" x2="720" y2="362" stroke="#c9943a" stroke-width="1.2" opacity=".3"/>
             <rect x="342" y="355" width="116" height="130" fill="#050e28"/>
             <path d="M342,403 Q400,341 458,403" fill="#050e28"/>
-            <path d="M336,405 Q400,335 464,405" stroke="#f0c060" stroke-width="4" fill="none" filter="url(#goldGlow)"/>
-            <path d="M336,405 Q400,335 464,405" stroke="#7a5010" stroke-width="6" fill="none" opacity=".6"/>
-            <path d="M336,405 Q400,335 464,405" stroke="#ffe090" stroke-width="2" fill="none"/>
-            <line x1="358" y1="355" x2="358" y2="485" stroke="#c9943a" stroke-width="1.8" opacity=".5"/>
-            <line x1="376" y1="347" x2="376" y2="485" stroke="#c9943a" stroke-width="1.8" opacity=".5"/>
-            <line x1="394" y1="343" x2="394" y2="485" stroke="#c9943a" stroke-width="1.8" opacity=".5"/>
-            <line x1="412" y1="343" x2="412" y2="485" stroke="#c9943a" stroke-width="1.8" opacity=".5"/>
-            <line x1="430" y1="347" x2="430" y2="485" stroke="#c9943a" stroke-width="1.8" opacity=".5"/>
-            <line x1="448" y1="355" x2="448" y2="485" stroke="#c9943a" stroke-width="1.8" opacity=".5"/>
-            <line x1="336" y1="388" x2="464" y2="388" stroke="#c9943a" stroke-width="1.5" opacity=".4"/>
-            <line x1="336" y1="418" x2="464" y2="418" stroke="#c9943a" stroke-width="1.5" opacity=".4"/>
-            <ellipse cx="400" cy="398" rx="55" ry="65" fill="#f0c060" opacity=".04" filter="url(#glowStrong)"/>
-            <circle cx="400" cy="337" r="8" fill="url(#moonGrad)" filter="url(#glow)"/>
-            <circle cx="400" cy="337" r="4" fill="white" opacity=".8"/>
-            <path d="M290,363 C270,348 260,373 275,383 C290,393 300,373 290,363Z" fill="#c9943a" opacity=".5" filter="url(#glow)"/>
-            <path d="M285,383 C265,393 268,413 282,411 C296,409 295,391 285,383Z" fill="#c9943a" opacity=".4"/>
-            <path d="M510,363 C530,348 540,373 525,383 C510,393 500,373 510,363Z" fill="#c9943a" opacity=".5" filter="url(#glow)"/>
-            <path d="M515,383 C535,393 532,413 518,411 C504,409 505,391 515,383Z" fill="#c9943a" opacity=".4"/>
+            <path d="M336,405 Q400,335 464,405" stroke="#f0c060" stroke-width="3.5" fill="none" filter="url(#goldGlow)"/>
+            <path d="M336,405 Q400,335 464,405" stroke="#ffe090" stroke-width="1.5" fill="none"/>
+            <line x1="358" y1="355" x2="358" y2="485" stroke="#c9943a" stroke-width="1.5" opacity=".45"/>
+            <line x1="376" y1="347" x2="376" y2="485" stroke="#c9943a" stroke-width="1.5" opacity=".45"/>
+            <line x1="394" y1="343" x2="394" y2="485" stroke="#c9943a" stroke-width="1.5" opacity=".45"/>
+            <line x1="412" y1="343" x2="412" y2="485" stroke="#c9943a" stroke-width="1.5" opacity=".45"/>
+            <line x1="430" y1="347" x2="430" y2="485" stroke="#c9943a" stroke-width="1.5" opacity=".45"/>
+            <line x1="448" y1="355" x2="448" y2="485" stroke="#c9943a" stroke-width="1.5" opacity=".45"/>
+            <circle cx="400" cy="337" r="7" fill="url(#moonGrad)" filter="url(#glow)"/>
             <circle cx="285" cy="411" r="16" fill="#8b0000" opacity=".9"/><circle cx="285" cy="411" r="10" fill="#c41230"/><circle cx="285" cy="411" r="5" fill="#e84060" opacity=".8"/>
             <ellipse cx="268" cy="418" rx="10" ry="4" fill="#4a7018" opacity=".6" transform="rotate(-20 268 418)"/>
             <circle cx="515" cy="411" r="16" fill="#8b0000" opacity=".9"/><circle cx="515" cy="411" r="10" fill="#c41230"/><circle cx="515" cy="411" r="5" fill="#e84060" opacity=".8"/>
             <ellipse cx="532" cy="418" rx="10" ry="4" fill="#4a7018" opacity=".6" transform="rotate(20 532 418)"/>
-
             <!-- Torre izquierda -->
             <rect x="85" y="188" width="115" height="213" fill="url(#towerGrad)"/>
             <rect x="85" y="188" width="115" height="2" fill="url(#goldEdge)"/>
-            <line x1="85" y1="188" x2="85" y2="401" stroke="#c9943a" stroke-width="1.5" opacity=".3"/>
-            <line x1="200" y1="188" x2="200" y2="401" stroke="#c9943a" stroke-width="1.5" opacity=".3"/>
             <polygon points="50,188 235,188 142,88" fill="url(#roofGrad)"/>
-            <line x1="50" y1="188" x2="142" y2="88" stroke="#f0c060" stroke-width="2" opacity=".6"/>
-            <line x1="235" y1="188" x2="142" y2="88" stroke="#f0c060" stroke-width="2" opacity=".6"/>
-            <line x1="50" y1="188" x2="235" y2="188" stroke="#f0c060" stroke-width="2" opacity=".4"/>
+            <line x1="50" y1="188" x2="142" y2="88" stroke="#f0c060" stroke-width="2" opacity=".55"/>
+            <line x1="235" y1="188" x2="142" y2="88" stroke="#f0c060" stroke-width="2" opacity=".55"/>
             <rect x="85" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="115" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="145" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="175" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="125" y="233" width="50" height="65" rx="25" fill="url(#windowGlow)" filter="url(#glowStrong)"/>
             <rect x="130" y="236" width="40" height="58" rx="20" fill="#ffe8a0"/>
-            <line x1="150" y1="236" x2="150" y2="294" stroke="#c9943a" stroke-width="1.5" opacity=".5"/>
-            <line x1="130" y1="263" x2="170" y2="263" stroke="#c9943a" stroke-width="1.5" opacity=".5"/>
-            <rect x="122" y="230" width="56" height="71" rx="28" fill="none" stroke="#f0c060" stroke-width="2.5" filter="url(#goldGlow)"/>
-            <ellipse cx="150" cy="211" rx="14" ry="18" fill="url(#windowGlow)" filter="url(#glow)"/>
-            <ellipse cx="150" cy="211" rx="9" ry="12" fill="#ffe090"/>
-            <!-- Bandera izq — visible completa con el nuevo viewBox -->
+            <rect x="122" y="230" width="56" height="71" rx="28" fill="none" stroke="#f0c060" stroke-width="2" filter="url(#goldGlow)"/>
+            <ellipse cx="150" cy="211" rx="13" ry="17" fill="url(#windowGlow)" filter="url(#glow)"/>
             <line x1="142" y1="88" x2="142" y2="56" stroke="#f0c060" stroke-width="2.5"/>
             <polygon points="142,56 176,44 142,32" fill="#8b0000"/>
-            <polygon points="142,56 176,44 142,32" fill="none" stroke="#c9943a" stroke-width="1"/>
-            <circle cx="90" cy="283" r="14" fill="#8b0000" opacity=".85"/><circle cx="90" cy="283" r="8" fill="#c41230" opacity=".9"/><circle cx="90" cy="283" r="4" fill="#e84060" opacity=".8"/>
+            <circle cx="90" cy="283" r="14" fill="#8b0000" opacity=".85"/><circle cx="90" cy="283" r="8" fill="#c41230"/><circle cx="90" cy="283" r="4" fill="#e84060" opacity=".8"/>
             <ellipse cx="76" cy="290" rx="9" ry="4" fill="#4a7018" opacity=".6" transform="rotate(-25 76 290)"/>
-
             <!-- Torre derecha -->
             <rect x="600" y="188" width="115" height="213" fill="url(#towerGrad)"/>
             <rect x="600" y="188" width="115" height="2" fill="url(#goldEdge)"/>
-            <line x1="600" y1="188" x2="600" y2="401" stroke="#c9943a" stroke-width="1.5" opacity=".3"/>
-            <line x1="715" y1="188" x2="715" y2="401" stroke="#c9943a" stroke-width="1.5" opacity=".3"/>
             <polygon points="565,188 750,188 658,88" fill="url(#roofGrad)"/>
-            <line x1="565" y1="188" x2="658" y2="88" stroke="#f0c060" stroke-width="2" opacity=".6"/>
-            <line x1="750" y1="188" x2="658" y2="88" stroke="#f0c060" stroke-width="2" opacity=".6"/>
-            <line x1="565" y1="188" x2="750" y2="188" stroke="#f0c060" stroke-width="2" opacity=".4"/>
+            <line x1="565" y1="188" x2="658" y2="88" stroke="#f0c060" stroke-width="2" opacity=".55"/>
+            <line x1="750" y1="188" x2="658" y2="88" stroke="#f0c060" stroke-width="2" opacity=".55"/>
             <rect x="600" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="630" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="660" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="690" y="171" width="22" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="625" y="233" width="50" height="65" rx="25" fill="url(#windowGlow)" filter="url(#glowStrong)"/>
             <rect x="630" y="236" width="40" height="58" rx="20" fill="#ffe8a0"/>
-            <line x1="650" y1="236" x2="650" y2="294" stroke="#c9943a" stroke-width="1.5" opacity=".5"/>
-            <line x1="630" y1="263" x2="670" y2="263" stroke="#c9943a" stroke-width="1.5" opacity=".5"/>
-            <rect x="622" y="230" width="56" height="71" rx="28" fill="none" stroke="#f0c060" stroke-width="2.5" filter="url(#goldGlow)"/>
-            <ellipse cx="650" cy="211" rx="14" ry="18" fill="url(#windowGlow)" filter="url(#glow)"/>
-            <ellipse cx="650" cy="211" rx="9" ry="12" fill="#ffe090"/>
-            <!-- Bandera der -->
+            <rect x="622" y="230" width="56" height="71" rx="28" fill="none" stroke="#f0c060" stroke-width="2" filter="url(#goldGlow)"/>
+            <ellipse cx="650" cy="211" rx="13" ry="17" fill="url(#windowGlow)" filter="url(#glow)"/>
             <line x1="658" y1="88" x2="658" y2="56" stroke="#f0c060" stroke-width="2.5"/>
             <polygon points="658,56 624,44 658,32" fill="#8b0000"/>
-            <polygon points="658,56 624,44 658,32" fill="none" stroke="#c9943a" stroke-width="1"/>
-            <circle cx="710" cy="283" r="14" fill="#8b0000" opacity=".85"/><circle cx="710" cy="283" r="8" fill="#c41230" opacity=".9"/><circle cx="710" cy="283" r="4" fill="#e84060" opacity=".8"/>
+            <circle cx="710" cy="283" r="14" fill="#8b0000" opacity=".85"/><circle cx="710" cy="283" r="8" fill="#c41230"/><circle cx="710" cy="283" r="4" fill="#e84060" opacity=".8"/>
             <ellipse cx="724" cy="290" rx="9" ry="4" fill="#4a7018" opacity=".6" transform="rotate(25 724 290)"/>
-
             <!-- Torre central -->
             <rect x="322" y="118" width="156" height="248" fill="url(#towerGrad)"/>
             <rect x="322" y="118" width="156" height="2" fill="url(#goldEdge)"/>
-            <line x1="322" y1="118" x2="322" y2="366" stroke="#c9943a" stroke-width="1.5" opacity=".35"/>
-            <line x1="478" y1="118" x2="478" y2="366" stroke="#c9943a" stroke-width="1.5" opacity=".35"/>
             <polygon points="298,118 502,118 400,26" fill="url(#roofGrad)"/>
-            <line x1="298" y1="118" x2="400" y2="26" stroke="#f0c060" stroke-width="2.5" opacity=".7"/>
-            <line x1="502" y1="118" x2="400" y2="26" stroke="#f0c060" stroke-width="2.5" opacity=".7"/>
-            <line x1="298" y1="118" x2="502" y2="118" stroke="#f0c060" stroke-width="2.5" opacity=".5"/>
+            <line x1="298" y1="118" x2="400" y2="26" stroke="#f0c060" stroke-width="2.5" opacity=".65"/>
+            <line x1="502" y1="118" x2="400" y2="26" stroke="#f0c060" stroke-width="2.5" opacity=".65"/>
             <rect x="322" y="101" width="24" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="354" y="101" width="24" height="20" fill="url(#towerGrad)" rx="2"/>
             <rect x="386" y="101" width="24" height="20" fill="url(#towerGrad)" rx="2"/>
@@ -525,81 +553,46 @@
             <rect x="450" y="101" width="24" height="20" fill="url(#towerGrad)" rx="2"/>
             <ellipse cx="400" cy="228" rx="42" ry="58" fill="url(#windowGlow)" filter="url(#glowStrong)"/>
             <ellipse cx="400" cy="228" rx="34" ry="50" fill="#fff8d0"/>
-            <ellipse cx="400" cy="228" rx="42" ry="58" fill="none" stroke="#f0c060" stroke-width="4" filter="url(#goldGlow)"/>
-            <ellipse cx="400" cy="228" rx="42" ry="58" fill="none" stroke="#7a5010" stroke-width="6" opacity=".5"/>
-            <ellipse cx="400" cy="228" rx="38" ry="54" fill="none" stroke="#ffe090" stroke-width="1.5" opacity=".7"/>
-            <line x1="400" y1="186" x2="400" y2="284" stroke="#c9943a" stroke-width="2" opacity=".5"/>
-            <line x1="360" y1="228" x2="440" y2="228" stroke="#c9943a" stroke-width="2" opacity=".5"/>
-            <!-- Rosa cima -->
-            <rect x="392" y="26" width="16" height="28" rx="2" fill="#c9943a" opacity=".7"/>
+            <ellipse cx="400" cy="228" rx="42" ry="58" fill="none" stroke="#f0c060" stroke-width="3.5" filter="url(#goldGlow)"/>
+            <line x1="400" y1="186" x2="400" y2="284" stroke="#c9943a" stroke-width="2" opacity=".45"/>
+            <line x1="360" y1="228" x2="440" y2="228" stroke="#c9943a" stroke-width="2" opacity=".45"/>
+            <rect x="392" y="26" width="16" height="28" rx="2" fill="#c9943a" opacity=".65"/>
             <circle cx="400" cy="23" r="14" fill="#8b0000" opacity=".95"/>
             <circle cx="400" cy="23" r="9" fill="#c41230"/>
             <circle cx="400" cy="23" r="5" fill="#e84060" opacity=".9"/>
-            <circle cx="397" cy="20" r="3" fill="#ff8090" opacity=".7"/>
-            <ellipse cx="379" cy="30" rx="11" ry="4" fill="#4a7018" opacity=".7" transform="rotate(-30 379 30)"/>
-            <ellipse cx="421" cy="30" rx="11" ry="4" fill="#4a7018" opacity=".7" transform="rotate(30 421 30)"/>
-
+            <ellipse cx="379" cy="30" rx="11" ry="4" fill="#4a7018" opacity=".65" transform="rotate(-30 379 30)"/>
+            <ellipse cx="421" cy="30" rx="11" ry="4" fill="#4a7018" opacity=".65" transform="rotate(30 421 30)"/>
             <!-- Torres medias -->
             <rect x="175" y="230" width="80" height="148" fill="url(#towerGrad)" opacity=".95"/>
             <polygon points="168,230 262,230 215,166" fill="url(#roofGrad)"/>
-            <line x1="168" y1="230" x2="215" y2="166" stroke="#f0c060" stroke-width="1.5" opacity=".5"/>
-            <line x1="262" y1="230" x2="215" y2="166" stroke="#f0c060" stroke-width="1.5" opacity=".5"/>
             <ellipse cx="215" cy="288" rx="16" ry="22" fill="url(#windowGlow)" filter="url(#glow)"/>
             <ellipse cx="215" cy="288" rx="10" ry="15" fill="#ffe090"/>
-            <ellipse cx="215" cy="288" rx="16" ry="22" fill="none" stroke="#f0c060" stroke-width="1.5" opacity=".6"/>
             <line x1="215" y1="166" x2="215" y2="140" stroke="#f0c060" stroke-width="2"/>
             <polygon points="215,140 240,130 215,120" fill="#8b0000"/>
             <rect x="545" y="230" width="80" height="148" fill="url(#towerGrad)" opacity=".95"/>
             <polygon points="538,230 632,230 585,166" fill="url(#roofGrad)"/>
-            <line x1="538" y1="230" x2="585" y2="166" stroke="#f0c060" stroke-width="1.5" opacity=".5"/>
-            <line x1="632" y1="230" x2="585" y2="166" stroke="#f0c060" stroke-width="1.5" opacity=".5"/>
             <ellipse cx="585" cy="288" rx="16" ry="22" fill="url(#windowGlow)" filter="url(#glow)"/>
             <ellipse cx="585" cy="288" rx="10" ry="15" fill="#ffe090"/>
-            <ellipse cx="585" cy="288" rx="16" ry="22" fill="none" stroke="#f0c060" stroke-width="1.5" opacity=".6"/>
             <line x1="585" y1="166" x2="585" y2="140" stroke="#f0c060" stroke-width="2"/>
             <polygon points="585,140 560,130 585,120" fill="#8b0000"/>
-
             <!-- Arco barroco -->
-            <path d="M120,478 C120,278 280,148 400,123 C520,148 680,278 680,478" fill="none" stroke="#f0c060" stroke-width="3.5" opacity=".5" filter="url(#goldGlow)"/>
-            <path d="M120,478 C120,278 280,148 400,123 C520,148 680,278 680,478" fill="none" stroke="#7a5010" stroke-width="5.5" opacity=".3"/>
-            <path d="M130,453 C110,423 108,393 125,383" stroke="#f0c060" stroke-width="2" fill="none" opacity=".45"/>
-            <path d="M670,453 C690,423 692,393 675,383" stroke="#f0c060" stroke-width="2" fill="none" opacity=".45"/>
-            <circle cx="125" cy="381" r="6" fill="#c9943a" opacity=".5"/>
-            <circle cx="675" cy="381" r="6" fill="#c9943a" opacity=".5"/>
-            <circle cx="142" cy="423" r="18" fill="#8b0000" opacity=".9" filter="url(#glow)"/>
-            <circle cx="142" cy="423" r="12" fill="#c41230"/><circle cx="142" cy="423" r="6" fill="#e84060" opacity=".9"/>
-            <circle cx="138" cy="419" r="3.5" fill="#ff8090" opacity=".7"/>
-            <ellipse cx="123" cy="431" rx="12" ry="5" fill="#4a7018" opacity=".65" transform="rotate(-20 123 431)"/>
-            <ellipse cx="130" cy="441" rx="11" ry="4" fill="#3a6010" opacity=".5" transform="rotate(15 130 441)"/>
-            <circle cx="658" cy="423" r="18" fill="#8b0000" opacity=".9" filter="url(#glow)"/>
-            <circle cx="658" cy="423" r="12" fill="#c41230"/><circle cx="658" cy="423" r="6" fill="#e84060" opacity=".9"/>
-            <circle cx="654" cy="419" r="3.5" fill="#ff8090" opacity=".7"/>
-            <ellipse cx="677" cy="431" rx="12" ry="5" fill="#4a7018" opacity=".65" transform="rotate(20 677 431)"/>
-            <ellipse cx="670" cy="441" rx="11" ry="4" fill="#3a6010" opacity=".5" transform="rotate(-15 670 441)"/>
-            <circle cx="200" cy="378" r="13" fill="#8b0000" opacity=".8"/><circle cx="200" cy="378" r="8" fill="#c41230" opacity=".9"/><circle cx="200" cy="378" r="4" fill="#e84060" opacity=".7"/>
-            <ellipse cx="186" cy="385" rx="9" ry="4" fill="#4a7018" opacity=".6" transform="rotate(-15 186 385)"/>
-            <circle cx="600" cy="378" r="13" fill="#8b0000" opacity=".8"/><circle cx="600" cy="378" r="8" fill="#c41230" opacity=".9"/><circle cx="600" cy="378" r="4" fill="#e84060" opacity=".7"/>
-            <ellipse cx="614" cy="385" rx="9" ry="4" fill="#4a7018" opacity=".6" transform="rotate(15 614 385)"/>
-            <ellipse cx="170" cy="343" rx="20" ry="8" fill="#5a8020" opacity=".5" transform="rotate(-40 170 343)"/>
-            <ellipse cx="185" cy="331" rx="18" ry="7" fill="#4a7018" opacity=".4" transform="rotate(-55 185 331)"/>
-            <ellipse cx="630" cy="343" rx="20" ry="8" fill="#5a8020" opacity=".5" transform="rotate(40 630 343)"/>
-            <ellipse cx="615" cy="331" rx="18" ry="7" fill="#4a7018" opacity=".4" transform="rotate(55 615 331)"/>
-            <line x1="0" y1="480" x2="800" y2="480" stroke="#f0c060" stroke-width="2" opacity=".3"/>
+            <path d="M120,478 C120,278 280,148 400,123 C520,148 680,278 680,478" fill="none" stroke="#f0c060" stroke-width="3" opacity=".45" filter="url(#goldGlow)"/>
+            <circle cx="142" cy="423" r="17" fill="#8b0000" opacity=".9" filter="url(#glow)"/>
+            <circle cx="142" cy="423" r="11" fill="#c41230"/><circle cx="142" cy="423" r="6" fill="#e84060" opacity=".9"/>
+            <ellipse cx="123" cy="431" rx="11" ry="5" fill="#4a7018" opacity=".6" transform="rotate(-20 123 431)"/>
+            <circle cx="658" cy="423" r="17" fill="#8b0000" opacity=".9" filter="url(#glow)"/>
+            <circle cx="658" cy="423" r="11" fill="#c41230"/><circle cx="658" cy="423" r="6" fill="#e84060" opacity=".9"/>
+            <ellipse cx="677" cy="431" rx="11" ry="5" fill="#4a7018" opacity=".6" transform="rotate(20 677 431)"/>
+            <!-- Partículas SVG animadas (pocas, nativas) -->
+            <circle cx="200" cy="360" r="3" fill="#f0c060" opacity="0"><animate attributeName="cy" values="360;200" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.8;0" dur="5s" repeatCount="indefinite"/></circle>
+            <circle cx="400" cy="310" r="4" fill="#ffe090" opacity="0"><animate attributeName="cy" values="310;130" dur="6s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.9;0" dur="6s" begin="1s" repeatCount="indefinite"/></circle>
+            <circle cx="600" cy="340" r="3" fill="#f0c060" opacity="0"><animate attributeName="cy" values="340;170" dur="4.5s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.75;0" dur="4.5s" begin="2s" repeatCount="indefinite"/></circle>
+            <ellipse cx="150" cy="263" rx="10" ry="14" fill="#fffce0" opacity="0"><animate attributeName="opacity" values="0;.4;0" dur="4s" begin=".5s" repeatCount="indefinite"/></ellipse>
+            <ellipse cx="650" cy="263" rx="10" ry="14" fill="#fffce0" opacity="0"><animate attributeName="opacity" values="0;.4;0" dur="4s" begin="2s" repeatCount="indefinite"/></ellipse>
+            <ellipse cx="400" cy="228" rx="20" ry="28" fill="#fffce0" opacity="0"><animate attributeName="opacity" values="0;.28;0" dur="5s" begin="1s" repeatCount="indefinite"/></ellipse>
+            <circle cx="142" cy="44" r="7" fill="#ffe090" opacity="0" filter="url(#glow)"><animate attributeName="opacity" values="0;.85;0" dur="2.8s" repeatCount="indefinite"/><animate attributeName="r" values="4;11;4" dur="2.8s" repeatCount="indefinite"/></circle>
+            <circle cx="658" cy="44" r="7" fill="#ffe090" opacity="0" filter="url(#glow)"><animate attributeName="opacity" values="0;.85;0" dur="2.8s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="r" values="4;11;4" dur="2.8s" begin="1.4s" repeatCount="indefinite"/></circle>
             <line x1="0" y1="477" x2="800" y2="477" stroke="#7a5010" stroke-width="3" opacity=".4"/>
-
-            <!-- Partículas mágicas animadas SVG -->
-            <circle cx="200" cy="360" r="3" fill="#f0c060" opacity="0"><animate attributeName="cy" values="360;210;160" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.9;0" dur="5s" repeatCount="indefinite"/><animate attributeName="r" values="2;5;1" dur="5s" repeatCount="indefinite"/></circle>
-            <circle cx="400" cy="310" r="4" fill="#ffe090" opacity="0"><animate attributeName="cy" values="310;160;90" dur="6s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="6s" begin="1s" repeatCount="indefinite"/><animate attributeName="cx" values="400;412;392" dur="6s" begin="1s" repeatCount="indefinite"/></circle>
-            <circle cx="600" cy="340" r="3" fill="#f0c060" opacity="0"><animate attributeName="cy" values="340;190;130" dur="4.5s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.8;0" dur="4.5s" begin="2s" repeatCount="indefinite"/></circle>
-            <circle cx="300" cy="280" r="2" fill="#e84060" opacity="0"><animate attributeName="cy" values="280;150;100" dur="5.5s" begin=".8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.7;0" dur="5.5s" begin=".8s" repeatCount="indefinite"/></circle>
-            <circle cx="500" cy="300" r="2.5" fill="#c9943a" opacity="0"><animate attributeName="cy" values="300;170;110" dur="4.8s" begin="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.8;0" dur="4.8s" begin="1.8s" repeatCount="indefinite"/></circle>
-            <!-- Destellos ventanas -->
-            <ellipse cx="150" cy="263" rx="10" ry="14" fill="#fffce0" opacity="0"><animate attributeName="opacity" values="0;.45;0" dur="4s" begin=".5s" repeatCount="indefinite"/></ellipse>
-            <ellipse cx="650" cy="263" rx="10" ry="14" fill="#fffce0" opacity="0"><animate attributeName="opacity" values="0;.45;0" dur="4s" begin="2s" repeatCount="indefinite"/></ellipse>
-            <ellipse cx="400" cy="228" rx="20" ry="28" fill="#fffce0" opacity="0"><animate attributeName="opacity" values="0;.32;0" dur="5s" begin="1s" repeatCount="indefinite"/></ellipse>
-            <!-- Halos de banderas -->
-            <circle cx="142" cy="44" r="8" fill="#ffe090" opacity="0" filter="url(#glow)"><animate attributeName="opacity" values="0;.9;0" dur="2.8s" repeatCount="indefinite"/><animate attributeName="r" values="5;12;5" dur="2.8s" repeatCount="indefinite"/></circle>
-            <circle cx="658" cy="44" r="8" fill="#ffe090" opacity="0" filter="url(#glow)"><animate attributeName="opacity" values="0;.9;0" dur="2.8s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="r" values="5;12;5" dur="2.8s" begin="1.4s" repeatCount="indefinite"/></circle>
         </svg>
         <div class="castle-mist"></div>
     </div>
@@ -608,27 +601,21 @@
 <!-- LIBRO MÁGICO -->
 <div id="book-overlay">
     <div class="bk-stars" id="bkStars"></div>
-    <div id="bkSparkles"></div>
     <div class="book-aura"></div>
 
-    <!-- Anillo de runas exterior -->
     <svg class="rune-ring-outer" viewBox="0 0 330 415" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;pointer-events:none">
-        <ellipse cx="165" cy="207" rx="158" ry="198" stroke="rgba(90,46,0,0.3)" stroke-width="1.5" stroke-dasharray="8 14"/>
-        <text x="157" y="11" font-size="12" fill="rgba(90,46,0,0.55)" font-family="serif">✦</text>
-        <text x="313" y="210" font-size="12" fill="rgba(90,46,0,0.45)" font-family="serif">✦</text>
-        <text x="157" y="408" font-size="12" fill="rgba(90,46,0,0.55)" font-family="serif">✦</text>
-        <text x="3" y="210" font-size="12" fill="rgba(90,46,0,0.45)" font-family="serif">✦</text>
-        <text x="274" y="72" font-size="10" fill="rgba(138,80,16,0.4)" font-family="serif">⬡</text>
-        <text x="38" y="72" font-size="10" fill="rgba(138,80,16,0.4)" font-family="serif">⬡</text>
-        <text x="274" y="352" font-size="10" fill="rgba(138,80,16,0.4)" font-family="serif">⬡</text>
-        <text x="38" y="352" font-size="10" fill="rgba(138,80,16,0.4)" font-family="serif">⬡</text>
+        <ellipse cx="165" cy="207" rx="158" ry="198" stroke="rgba(90,46,0,0.28)" stroke-width="1.5" stroke-dasharray="8 14"/>
+        <text x="157" y="11" font-size="12" fill="rgba(90,46,0,0.5)" font-family="serif">✦</text>
+        <text x="313" y="210" font-size="12" fill="rgba(90,46,0,0.42)" font-family="serif">✦</text>
+        <text x="157" y="408" font-size="12" fill="rgba(90,46,0,0.5)" font-family="serif">✦</text>
+        <text x="3" y="210" font-size="12" fill="rgba(90,46,0,0.42)" font-family="serif">✦</text>
     </svg>
     <svg class="rune-ring-inner2" viewBox="0 0 295 375" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;pointer-events:none">
-        <ellipse cx="147" cy="187" rx="139" ry="175" stroke="rgba(139,0,0,0.22)" stroke-width="1" stroke-dasharray="5 18"/>
-        <text x="139" y="14" font-size="11" fill="rgba(139,0,0,0.42)" font-family="serif">🌹</text>
-        <text x="282" y="190" font-size="11" fill="rgba(139,0,0,0.35)" font-family="serif">🌹</text>
-        <text x="139" y="368" font-size="11" fill="rgba(139,0,0,0.42)" font-family="serif">🌹</text>
-        <text x="3" y="190" font-size="11" fill="rgba(139,0,0,0.35)" font-family="serif">🌹</text>
+        <ellipse cx="147" cy="187" rx="139" ry="175" stroke="rgba(139,0,0,0.18)" stroke-width="1" stroke-dasharray="5 18"/>
+        <text x="139" y="14" font-size="11" fill="rgba(139,0,0,0.38)" font-family="serif">🌹</text>
+        <text x="282" y="190" font-size="11" fill="rgba(139,0,0,0.32)" font-family="serif">🌹</text>
+        <text x="139" y="368" font-size="11" fill="rgba(139,0,0,0.38)" font-family="serif">🌹</text>
+        <text x="3" y="190" font-size="11" fill="rgba(139,0,0,0.32)" font-family="serif">🌹</text>
     </svg>
 
     <p class="overlay-tagline">✦ &nbsp; Una historia de magia te espera &nbsp; ✦</p>
@@ -653,7 +640,6 @@
             <div class="book-front">
                 <div class="cover-face">
                     <div class="cover-sheen"></div>
-                    <div class="cover-pulse"></div>
                     <div class="cover-rule">
                         <svg viewBox="0 0 180 14" xmlns="http://www.w3.org/2000/svg">
                             <line x1="0" y1="7" x2="180" y2="7" stroke="#3d1e00" stroke-width=".8" opacity=".6"/>
@@ -666,78 +652,32 @@
                     <div class="cover-oval">
                         <svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <linearGradient id="ovalGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#fffbe0"/><stop offset="25%" stop-color="#f0c060"/>
-                                    <stop offset="60%" stop-color="#c9943a"/><stop offset="100%" stop-color="#7a5010"/>
-                                </linearGradient>
-                                <radialGradient id="ovalFill" cx="50%" cy="45%" r="55%">
-                                    <stop offset="0%" stop-color="#ffe8c0"/><stop offset="60%" stop-color="#f5d080"/>
-                                    <stop offset="100%" stop-color="#c9943a"/>
-                                </radialGradient>
-                                <radialGradient id="roseCenter" cx="40%" cy="35%" r="60%">
-                                    <stop offset="0%" stop-color="#ff6080"/><stop offset="50%" stop-color="#e01840"/>
-                                    <stop offset="100%" stop-color="#8b0000"/>
-                                </radialGradient>
-                                <filter id="roseShadow" x="-20%" y="-20%" width="140%" height="140%">
-                                    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(139,0,0,0.4)"/>
-                                </filter>
-                                <filter id="goldShine" x="-10%" y="-10%" width="120%" height="120%">
-                                    <feGaussianBlur stdDeviation="1.5" result="b"/>
-                                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                </filter>
+                                <linearGradient id="ovalGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fffbe0"/><stop offset="25%" stop-color="#f0c060"/><stop offset="60%" stop-color="#c9943a"/><stop offset="100%" stop-color="#7a5010"/></linearGradient>
+                                <radialGradient id="ovalFill" cx="50%" cy="45%" r="55%"><stop offset="0%" stop-color="#ffe8c0"/><stop offset="60%" stop-color="#f5d080"/><stop offset="100%" stop-color="#c9943a"/></radialGradient>
+                                <radialGradient id="roseCenter" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#ff6080"/><stop offset="50%" stop-color="#e01840"/><stop offset="100%" stop-color="#8b0000"/></radialGradient>
                             </defs>
-
-                            <!-- Fondo oval dorado cálido -->
                             <ellipse cx="60" cy="62" rx="46" ry="54" fill="url(#ovalFill)"/>
-
-                            <!-- Marco oval dorado brillante -->
-                            <ellipse cx="60" cy="62" rx="50" ry="58" fill="none" stroke="url(#ovalGold)" stroke-width="5" filter="url(#goldShine)"/>
-                            <ellipse cx="60" cy="62" rx="46" ry="54" fill="none" stroke="rgba(255,240,160,.6)" stroke-width="1.2"/>
-                            <!-- Joya superior -->
+                            <ellipse cx="60" cy="62" rx="50" ry="58" fill="none" stroke="url(#ovalGold)" stroke-width="5"/>
+                            <ellipse cx="60" cy="62" rx="46" ry="54" fill="none" stroke="rgba(255,240,160,.55)" stroke-width="1.2"/>
                             <polygon points="60,6 63,12 60,18 57,12" fill="#ffe090" opacity=".95"/>
-                            <circle cx="60" cy="12" r="2.5" fill="white" opacity=".8"/>
-
-                            <!-- Tallo central -->
                             <line x1="60" y1="110" x2="60" y2="72" stroke="#3a6010" stroke-width="2.5" stroke-linecap="round"/>
-                            <!-- Hojas del tallo -->
                             <path d="M60,95 C50,88 42,90 44,98 C46,106 58,100 60,95Z" fill="#4a8018" opacity=".9"/>
                             <path d="M60,85 C70,78 78,80 76,88 C74,96 62,90 60,85Z" fill="#3a6010" opacity=".85"/>
-
-                            <!-- Rosa grande central — pétalos exteriores -->
-                            <ellipse cx="60" cy="62" rx="22" ry="20" fill="#c41230" filter="url(#roseShadow)"/>
-                            <!-- Pétalos capa exterior -->
+                            <ellipse cx="60" cy="62" rx="22" ry="20" fill="#c41230"/>
                             <ellipse cx="60" cy="44" rx="11" ry="14" fill="#d01840" transform="rotate(-5 60 44)"/>
                             <ellipse cx="60" cy="80" rx="11" ry="14" fill="#c01030" transform="rotate(5 60 80)"/>
                             <ellipse cx="42" cy="62" rx="14" ry="11" fill="#c81838" transform="rotate(-8 42 62)"/>
                             <ellipse cx="78" cy="62" rx="14" ry="11" fill="#c01030" transform="rotate(8 78 62)"/>
                             <ellipse cx="46" cy="47" rx="12" ry="13" fill="#d02040" transform="rotate(-35 46 47)"/>
                             <ellipse cx="74" cy="47" rx="12" ry="13" fill="#c81838" transform="rotate(35 74 47)"/>
-                            <ellipse cx="46" cy="77" rx="12" ry="13" fill="#b81028" transform="rotate(35 46 77)"/>
-                            <ellipse cx="74" cy="77" rx="12" ry="13" fill="#c01030" transform="rotate(-35 74 77)"/>
-                            <!-- Pétalos capa media -->
                             <ellipse cx="60" cy="50" rx="9" ry="11" fill="#e02050"/>
-                            <ellipse cx="60" cy="74" rx="9" ry="11" fill="#c81838"/>
                             <ellipse cx="48" cy="56" rx="11" ry="9" fill="#d81840" transform="rotate(-20 48 56)"/>
                             <ellipse cx="72" cy="56" rx="11" ry="9" fill="#d01838" transform="rotate(20 72 56)"/>
-                            <ellipse cx="48" cy="68" rx="11" ry="9" fill="#c01030" transform="rotate(20 48 68)"/>
-                            <ellipse cx="72" cy="68" rx="11" ry="9" fill="#c81838" transform="rotate(-20 72 68)"/>
-                            <!-- Centro de la rosa -->
                             <circle cx="60" cy="62" r="12" fill="url(#roseCenter)"/>
-                            <circle cx="60" cy="62" r="7" fill="#ff4060" opacity=".7"/>
-                            <circle cx="60" cy="62" r="4" fill="#ff8090" opacity=".6"/>
-                            <circle cx="57" cy="59" r="2" fill="rgba(255,255,255,.35)"/>
-
-                            <!-- Hojitas laterales decorativas -->
+                            <circle cx="60" cy="62" r="7" fill="#ff4060" opacity=".65"/>
+                            <circle cx="57" cy="59" r="2" fill="rgba(255,255,255,.3)"/>
                             <path d="M22,62 C16,52 20,42 28,48 C34,53 30,62 22,62Z" fill="#4a8018" opacity=".85"/>
                             <path d="M98,62 C104,52 100,42 92,48 C86,53 90,62 98,62Z" fill="#3a6010" opacity=".85"/>
-                            <path d="M28,82 C20,78 18,68 26,68 C32,68 34,78 28,82Z" fill="#4a8018" opacity=".75"/>
-                            <path d="M92,82 C100,78 102,68 94,68 C88,68 86,78 92,82Z" fill="#3a6010" opacity=".75"/>
-
-                            <!-- Destellos dorados -->
-                            <circle cx="44" cy="38" r="2" fill="#ffe090" opacity=".8"/>
-                            <circle cx="76" cy="38" r="1.5" fill="#ffe090" opacity=".7"/>
-                            <circle cx="36" cy="58" r="1.5" fill="#f0c060" opacity=".6"/>
-                            <circle cx="84" cy="58" r="1.5" fill="#f0c060" opacity=".6"/>
                         </svg>
                     </div>
                     <div class="cover-titles">
@@ -762,12 +702,9 @@
                     <circle cx="20" cy="60" r="5" fill="#f0c060"><animate attributeName="cy" values="60;-20" dur=".8s" begin=".6s" fill="freeze"/><animate attributeName="opacity" values="1;0" dur=".8s" begin=".6s" fill="freeze"/></circle>
                     <circle cx="280" cy="80" r="4" fill="#ffe090"><animate attributeName="cy" values="80;-10" dur=".7s" begin=".7s" fill="freeze"/><animate attributeName="opacity" values="1;0" dur=".7s" begin=".7s" fill="freeze"/></circle>
                     <circle cx="150" cy="30" r="6" fill="#f0c060"><animate attributeName="cy" values="30;-50" dur=".9s" begin=".5s" fill="freeze"/><animate attributeName="opacity" values="1;0" dur=".9s" begin=".5s" fill="freeze"/></circle>
-                    <circle cx="60" cy="200" r="4" fill="#ffe090"><animate attributeName="cx" values="60;-20" dur=".7s" begin=".6s" fill="freeze"/><animate attributeName="opacity" values="1;0" dur=".7s" begin=".6s" fill="freeze"/></circle>
-                    <circle cx="240" cy="180" r="5" fill="#f0c060"><animate attributeName="cx" values="240;320" dur=".75s" begin=".65s" fill="freeze"/><animate attributeName="opacity" values="1;0" dur=".75s" begin=".65s" fill="freeze"/></circle>
-                    <text x="30" y="140" font-size="20" opacity="0"><animate attributeName="opacity" values="0;1;0" dur=".7s" begin=".5s"/><animate attributeName="y" values="140;60;40" dur=".7s" begin=".5s"/>✨</text>
+                    <text x="30" y="140" font-size="20" opacity="0"><animate attributeName="opacity" values="0;1;0" dur=".7s" begin=".5s"/>✨</text>
                     <text x="220" y="100" font-size="16" opacity="0"><animate attributeName="opacity" values="0;1;0" dur=".8s" begin=".6s"/>⭐</text>
                     <text x="120" y="300" font-size="22" opacity="0"><animate attributeName="opacity" values="0;1;0" dur=".9s" begin=".55s"/>✨</text>
-                    <text x="250" y="260" font-size="14" opacity="0"><animate attributeName="opacity" values="0;1;0" dur=".6s" begin=".7s"/>🌟</text>
                 </svg>
             </div>
         </div>
@@ -779,41 +716,67 @@
     </div>
 </div>
 
-<audio id="bg-music" loop>
+<audio id="bg-music" loop preload="none">
     <source src="/assets/sound/cumple.mp3" type="audio/mpeg"/>
 </audio>
+
 <div id="particles"></div>
 <div id="rose-rain"></div>
 <div id="sparkles-container"></div>
 
-<section class="hero" style="position:relative;z-index:1;isolation:isolate;background:linear-gradient(180deg,#f0deb8 0%,#fdf0d8 50%,#f8e8c8 100%)">
+<!-- HERO -->
+<section class="hero">
     <div class="hero-top-ornament"></div>
     <div class="hero-inner">
         <div class="crown-label"><span>✦ &nbsp; Un año de magia &nbsp; ✦</span></div>
         <div class="photo-frame-wrap">
-            <div class="photo-ring"></div><div class="photo-ring-inner"></div>
-            <div class="photo-oval"><img src="/assets/img/portada.webp" alt="Anya Isabella" loading="eager"/></div>
-            <span class="rose-deco rose-tl">🌹</span><span class="rose-deco rose-tr">🌹</span><span class="rose-deco rose-bl">🌹</span><span class="rose-deco rose-br">🌹</span>
+            <div class="photo-ring"></div>
+            <div class="photo-ring-inner"></div>
+            <div class="photo-oval">
+                <img src="/assets/img/portada.webp" alt="Anya Isabella" loading="eager" fetchpriority="high"/>
+            </div>
+            <span class="rose-deco rose-tl">🌹</span>
+            <span class="rose-deco rose-tr">🌹</span>
+            <span class="rose-deco rose-bl">🌹</span>
+            <span class="rose-deco rose-br">🌹</span>
         </div>
-        <div class="name-block"><div class="name-anya">ANYA</div><div class="name-isabella">ISABELLA</div></div>
+        <div class="name-block">
+            <div class="name-anya">ANYA</div>
+            <div class="name-isabella">ISABELLA</div>
+        </div>
         <span class="subtitle">Primer cumpleaños</span>
     </div>
 </section>
 
+<!-- CONTENIDO PRINCIPAL -->
 <div class="page-content">
-    <div class="gold-separator reveal"><div class="gs-line"></div><div class="gs-center">🌹 ✦ 🌹</div><div class="gs-line"></div></div>
+
+    <div class="gold-separator reveal">
+        <div class="gs-line"></div>
+        <div class="gs-center">🌹 ✦ 🌹</div>
+        <div class="gs-line"></div>
+    </div>
+
     <div class="convocatoria">CONVOCATORIA REAL</div>
-    <p class="intro-text reveal d1"
-        style="font-size: 24px">
+
+    <p class="intro-text reveal d1" style="font-size:clamp(1rem,4vw,1.4rem)">
         La princesa Anya Isabella invita<br>
-        A todos los príncipes y princesas a celebrar <br>
+        A todos los príncipes y princesas a celebrar<br>
         <em style="color:var(--gold);font-style:italic;">Su primer cumpleaños...</em>
     </p>
+
     <div class="roses-row reveal d2">🌹 🕯️ 🌹 🕯️ 🌹</div>
+
     <div class="section-label reveal">⏳ Cuenta regresiva</div>
     <div class="section-card reveal d1">
         <div class="card-top-bar"></div>
-        <div class="card-header"><div class="card-icon">🕰️</div><div><div class="card-title">Faltan para la celebración</div><div class="card-label">✦ El gran día se acerca ✦</div></div></div>
+        <div class="card-header">
+            <div class="card-icon">🕰️</div>
+            <div>
+                <div class="card-title">Faltan para la celebración</div>
+                <div class="card-label">✦ El gran día se acerca ✦</div>
+            </div>
+        </div>
         <div class="countdown-wrap" id="cdWrap">
             <div class="cd-unit"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Días</div></div>
             <div class="cd-unit"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Horas</div></div>
@@ -821,15 +784,23 @@
             <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Segundos</div></div>
         </div>
     </div>
+
     <div class="section-label reveal">🥂 Festejo</div>
     <div class="section-card reveal d2">
         <div class="card-top-bar"></div>
-        <div class="card-header"><div class="card-icon">🏰</div><div><div class="card-title">Festejo</div><div class="card-label">✦ En el castillo real ✦</div></div></div>
-        <div class="detail-row"><span class="dr-label">Fecha</span><span class="dr-value"><strong>Sabado 25 de Abril</strong></span></div>
+        <div class="card-header">
+            <div class="card-icon">🏰</div>
+            <div>
+                <div class="card-title">Festejo</div>
+                <div class="card-label">✦ En el castillo real ✦</div>
+            </div>
+        </div>
+        <div class="detail-row"><span class="dr-label">Fecha</span><span class="dr-value"><strong>Sábado 25 de Abril</strong></span></div>
         <div class="detail-row"><span class="dr-label">Hora</span><span class="dr-value"><strong>01:00 p. m.</strong></span></div>
         <div class="detail-row"><span class="dr-label">Lugar</span><span class="dr-value"><strong>Salón Rehilete</strong></span></div>
-        <a class="map-btn map-btn-gold" href="https://maps.app.goo.gl/ZKj1ZQFLYUVqYYWr7" target="_blank">📍 &nbsp; Ver ubicación en el mapa</a>
+        <a class="map-btn" href="https://maps.app.goo.gl/ZKj1ZQFLYUVqYYWr7" target="_blank" rel="noopener">📍 &nbsp; Ver ubicación en el mapa</a>
     </div>
+
     <div class="section-label reveal">📋 Cronograma</div>
     <div class="section-card reveal d1">
         <div class="card-top-bar"></div>
@@ -838,253 +809,62 @@
             <div><div class="card-title">Programa del día</div><div class="card-label">✦ El itinerario real ✦</div></div>
         </div>
         <div class="sched-wrap">
-            <div class="sched-item">
-                <div class="sched-time">01:00 pm</div>
-                <div class="sched-dot"></div>
-                <div class="sched-desc"><strong>Recepción de invitados</strong>Bienvenida al reino de Anya Isabella</div>
-            </div>
-            <div class="sched-item">
-                <div class="sched-time">02:00 pm</div>
-                <div class="sched-dot"></div>
-                <div class="sched-desc"><strong>Comida en el reino</strong>Un festín lleno de sabor y alegría</div>
-            </div>
-            <div class="sched-item">
-                <div class="sched-time">4:00 pm</div>
-                <div class="sched-dot"></div>
-                <div class="sched-desc"><strong>Actividades y diversión</strong>Juegos y sorpresas</div>
-            </div>
-            <div class="sched-item">
-                <div class="sched-time">5:00 pm</div>
-                <div class="sched-dot"></div>
-                <div class="sched-desc"><strong>Puestos encantados</strong> Dulces y antojitos mágicos</div>
-            </div>
-            <div class="sched-item">
-                <div class="sched-time">5:30 pm</div>
-                <div class="sched-dot"></div>
-                <div class="sched-desc"><strong>¡La hora del pastel!</strong> Festejo y piñata</div>
-            </div>
-            <div class="sched-item">
-                <div class="sched-time">6:00 pm</div>
-                <div class="sched-dot"></div>
-                <div class="sched-desc"><strong>Cierre mágico</strong>Despedida con recuerdos</div>
-            </div>
-            <div class="sched-item last">
-                <div class="sched-time">6:00 pm</div>
-                <div class="sched-dot gold"></div>
-                <div class="sched-desc"><strong>Convivencia encantada</strong> Tiempo para disfrutar juntos</div>
-            </div>
-        </div>
+            <div class="sched-item"><div class="sched-time">01:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Recepción de invitados</strong>Bienvenida al reino de Anya Isabella</div></div>
+            <div class="sched-item"><div class="sched-time">02:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Comida en el reino</strong>Un festín lleno de sabor y alegría</div></div>
+            <div class="sched-item"><div class="sched-time">4:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Actividades y diversión</strong>Juegos y sorpresas</div></div>
+            <div class="sched-item"><div class="sched-time">5:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Puestos encantados</strong>Dulces y antojitos mágicos</div></div>
+            <div class="sched-item"><div class="sched-time">5:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>¡La hora del pastel!</strong>Festejo y piñata</div></div>
+            <div class="sched-item"><div class="sched-time">6:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Cierre mágico</strong>Despedida con recuerdos</div></div>
+            <div class="sched-item"><div class="sched-time">6:00 pm</div><div class="sched-dot gold"></div><div class="sched-desc"><strong>Convivencia encantada</strong>Tiempo para disfrutar juntos</div></div>
         </div>
     </div>
+
     <div class="section-label reveal">📸 Momentos mágicos</div>
     <div class="section-card reveal d1">
         <div class="card-top-bar"></div>
-        <div class="card-header"><div class="card-icon">🌹</div><div><div class="card-title">Galería de Anya Isabella</div><div class="card-label">✦ Un año de recuerdos ✦</div></div></div>
+        <div class="card-header">
+            <div class="card-icon">🌹</div>
+            <div><div class="card-title">Galería de Anya Isabella</div><div class="card-label">✦ Un año de recuerdos ✦</div></div>
+        </div>
 
         <div class="carousel-section">
             <div class="carousel-track-wrap">
                 <div class="carousel-track" id="carTrack">
 
-                    <!-- Foto 0 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/0.webp" alt="Anya 1" loading="lazy"/>
-                            </div>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">La princesa ha llegado <em>🌹 El primer día</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/0.webp" alt="Anya día 1" loading="lazy" decoding="async"/></div><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">La princesa ha llegado <em>🌹 El primer día</em></div></div>
 
-                    <!-- Foto 1 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/1.webp" alt="Anya 1" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">1</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi dulce manzanita, Blancanieves <em>🍎 Mes 1</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/1.webp" alt="Anya mes 1" loading="lazy" decoding="async"/></div><span class="photo-num">1</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi dulce manzanita, Blancanieves <em>🍎 Mes 1</em></div></div>
 
-                    <!-- Foto 2 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/2.webp" alt="Anya 2" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">2</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi tesoro del mar, Ariel <em>🧜‍♀️ Mes 2</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/2.webp" alt="Anya mes 2" loading="lazy" decoding="async"/></div><span class="photo-num">2</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi tesoro del mar, Ariel <em>🧜‍♀️ Mes 2</em></div></div>
 
-                    <!-- Foto 3 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/3.webp" alt="Anya 3" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">3</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi coqueta, Minnie Mouse <em>🎀 Mes 3</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/3.webp" alt="Anya mes 3" loading="lazy" decoding="async"/></div><span class="photo-num">3</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi coqueta, Minnie Mouse <em>🎀 Mes 3</em></div></div>
 
-                    <!-- Foto 4 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/4.webp" alt="Anya 4" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">4</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi flor mágica, Rapunzel <em>🌸 Mes 4</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/4.webp" alt="Anya mes 4" loading="lazy" decoding="async"/></div><span class="photo-num">4</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi flor mágica, Rapunzel <em>🌸 Mes 4</em></div></div>
 
-                    <!-- Foto 5 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/5.webp" alt="Anya 5" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">5</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi valiente corazón, Moana <em>🌊 Mes 5</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/5.webp" alt="Anya mes 5" loading="lazy" decoding="async"/></div><span class="photo-num">5</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi valiente corazón, Moana <em>🌊 Mes 5</em></div></div>
 
-                    <!-- Foto 6 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/6.webp" alt="Anya 6" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">6</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi magia de medianoche, Cenicienta <em>👠 Mes 5</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/6.webp" alt="Anya mes 6" loading="lazy" decoding="async"/></div><span class="photo-num">6</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi magia de medianoche, Cenicienta <em>👠 Mes 6</em></div></div>
 
-                    <!-- Foto 7 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/7.webp" alt="Anya 7" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">7</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi dulce encanto, Jazmín <em>🕌 Mes 7</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/7.webp" alt="Anya mes 7" loading="lazy" decoding="async"/></div><span class="photo-num">7</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi dulce encanto, Jazmín <em>🕌 Mes 7</em></div></div>
 
-                    <!-- Foto 8 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/8.webp" alt="Anya 8" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">8</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi copito, Elsa <em>❄️ Mes 8</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/8.webp" alt="Anya mes 8" loading="lazy" decoding="async"/></div><span class="photo-num">8</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi copito, Elsa <em>❄️ Mes 8</em></div></div>
 
-                    <!-- Foto 9 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/9.webp" alt="Anya 9" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">9</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi chispa mágica, Tinkerbell<em>🧚‍♀️ Mes 9</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/9.webp" alt="Anya mes 9" loading="lazy" decoding="async"/></div><span class="photo-num">9</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi chispa mágica, Tinkerbell <em>🧚‍♀️ Mes 9</em></div></div>
 
-                    <!-- Foto 10 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/10.webp" alt="Anya 10" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">10</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi sueño encantado, Aurora <em>🌹 Mes 10</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/10.webp" alt="Anya mes 10" loading="lazy" decoding="async"/></div><span class="photo-num">10</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi sueño encantado, Aurora <em>🌹 Mes 10</em></div></div>
 
-                    <!-- Foto 11 -->
-                    <div class="photo-card">
-                        <div class="photo-card-bar"></div>
-                        <div class="photo-frame">
-                            <div class="photo-inner">
-                                <img src="/assets/img/11.webp" alt="Anya 11" loading="lazy"/>
-                            </div>
-                            <span class="photo-num">11</span>
-                            <span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                            <span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                        </div>
-                        <div class="photo-caption">Mi corazón valiente, Mulan <em>🌸 Mes 11</em></div>
-                    </div>
+                    <div class="photo-card"><div class="photo-card-bar"></div><div class="photo-frame"><div class="photo-inner"><img src="/assets/img/11.webp" alt="Anya mes 11" loading="lazy" decoding="async"/></div><span class="photo-num">11</span><span class="frame-corner fc-tl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-tr"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-bl"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span><span class="frame-corner fc-br"><svg viewBox="0 0 14 14" fill="none"><path d="M1 13V2a1 1 0 0 1 1-1h11" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></svg></span></div><div class="photo-caption">Mi corazón valiente, Mulan <em>🌸 Mes 11</em></div></div>
 
-                </div><!-- /carousel-track -->
+                </div>
             </div>
             <div class="carousel-controls">
-                <button class="carousel-btn" id="carPrev">‹</button>
+                <button class="carousel-btn" id="carPrev" aria-label="Anterior">‹</button>
                 <div class="carousel-dots" id="carDots"></div>
-                <button class="carousel-btn" id="carNext">›</button>
+                <button class="carousel-btn" id="carNext" aria-label="Siguiente">›</button>
             </div>
         </div>
     </div>
+
     <div class="section-label reveal">✨ Curiosidades</div>
     <div class="section-card reveal d1">
         <div class="card-top-bar"></div>
@@ -1092,109 +872,243 @@
             <div class="card-icon">🌹</div>
             <div><div class="card-title">Sobre Anya Isabella</div><div class="card-label">✦ Datos mágicos de la princesa ✦</div></div>
         </div>
-        <div class="curio-grid">
-            <div class="curio-item">
-                <span class="curio-icon">👑</span>
-                <div class="curio-text"><strong>Su nombre</strong>Anya significa "gracia" en ruso y hebreo, mientras que Isabella es la forma italiana de Isabel — "promesa de Dios". Un nombre digno de una princesa.</div>
-            </div>
-            <div class="curio-item">
-                <span class="curio-icon">🌹</span>
-                <div class="curio-text"><strong>Su flor favorita</strong>Desde pequeña ha demostrado una fascinación especial por las flores rojas, igual que la rosa encantada de La Bella y la Bestia.</div>
-            </div>
-            <div class="curio-item">
-                <span class="curio-icon">😄</span>
-                <div class="curio-text"><strong>Su superpoder</strong>Con una sola sonrisa es capaz de iluminar cualquier habitación y robar el corazón de todos los que la rodean.</div>
-            </div>
-            <div class="curio-item">
-                <span class="curio-icon">🎵</span>
-                <div class="curio-text"><strong>Su canción</strong>Desde el vientre de mamá ya escuchaba música — y hoy sigue moviéndose al ritmo de cualquier melodía que suene cerca.</div>
-            </div>
-            <div class="curio-item">
-                <span class="curio-icon">🍼</span>
-                <div class="curio-text"><strong>Su primer año</strong>En 365 días aprendió a sonreír, a gatear, a decir sus primeras sílabas... y a ser el centro de nuestro universo.</div>
-            </div>
-            <div class="curio-item">
-                <span class="curio-icon">✨</span>
-                <div class="curio-text"><strong>Su magia</strong>Llegó a este mundo para recordarnos que los cuentos de hadas sí existen — ella es la prueba más hermosa de ello.</div>
-            </div>
-        </div>
+        <div class="curio-item"><span class="curio-icon">👑</span><div class="curio-text"><strong>Su nombre</strong>Anya significa "gracia" en ruso y hebreo, mientras que Isabella es la forma italiana de Isabel — "promesa de Dios". Un nombre digno de una princesa.</div></div>
+        <div class="curio-item"><span class="curio-icon">🌹</span><div class="curio-text"><strong>Su flor favorita</strong>Desde pequeña ha demostrado una fascinación especial por las flores rojas, igual que la rosa encantada de La Bella y la Bestia.</div></div>
+        <div class="curio-item"><span class="curio-icon">😄</span><div class="curio-text"><strong>Su superpoder</strong>Con una sola sonrisa es capaz de iluminar cualquier habitación y robar el corazón de todos los que la rodean.</div></div>
+        <div class="curio-item"><span class="curio-icon">🎵</span><div class="curio-text"><strong>Su canción</strong>Desde el vientre de mamá ya escuchaba música — y hoy sigue moviéndose al ritmo de cualquier melodía que suene cerca.</div></div>
+        <div class="curio-item"><span class="curio-icon">🍼</span><div class="curio-text"><strong>Su primer año</strong>En 365 días aprendió a sonreír, a gatear, a decir sus primeras sílabas... y a ser el centro de nuestro universo.</div></div>
+        <div class="curio-item"><span class="curio-icon">✨</span><div class="curio-text"><strong>Su magia</strong>Llegó a este mundo para recordarnos que los cuentos de hadas sí existen — ella es la prueba más hermosa de ello.</div></div>
     </div>
 
-    <div class="gold-separator reveal" style="margin-top:2rem;"><div class="gs-line"></div><div class="gs-center">✦</div><div class="gs-line"></div></div>
+    <div class="gold-separator reveal" style="margin-top:2rem;">
+        <div class="gs-line"></div><div class="gs-center">✦</div><div class="gs-line"></div>
+    </div>
+
     <div class="bell-section reveal">
         <span class="bell-icon">🌹</span>
         <p class="bell-quote">"Como todo cuento de princesas,<br><em>el amor</em> hizo que llegara<br>el momento de celebrarte."</p>
         <p class="bell-verse">— Con todo el amor del mundo, sus papás 🥀</p>
-        <div class="roses-row" style="margin-top:1.5rem;font-size:1.4rem;"><span class="candle-float">🕯️</span> 🌹 <span class="candle-float" style="animation-delay:.4s;">🕯️</span></div>
+        <div class="roses-row" style="margin-top:1.5rem;font-size:1.4rem;">
+            <span class="candle-float">🕯️</span> 🌹 <span class="candle-float" style="animation-delay:.4s;">🕯️</span>
+        </div>
     </div>
 </div>
+
 <div class="bottom-bar"></div>
-<button class="music-btn" id="musicBtn" title="Música" aria-label="Música">🎵</button>
+<button class="music-btn" id="musicBtn" title="Música" aria-label="Reproducir música">🎵</button>
 
 <script>
-    const pc=document.getElementById('particles');
-    const syms=['✦','·','•','❦','✿'];
-    for(let i=0;i<20;i++){const el=document.createElement('div');el.className='particle';el.textContent=syms[Math.floor(Math.random()*syms.length)];const sz=Math.random()*8+7;el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;color:rgba(138,80,16,${Math.random()*.4+.2});animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*-35}s;`;pc.appendChild(el);}
-    // Rosas cayendo
-    const rr=document.getElementById('rose-rain');
-    const roseEmojis=['🌹','🌹','🌹','🌸','🌺'];
-    for(let i=0;i<22;i++){const el=document.createElement('div');el.className='rose-drop';el.textContent=roseEmojis[Math.floor(Math.random()*roseEmojis.length)];const sz=Math.random()*12+14;el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;animation-duration:${Math.random()*14+10}s;animation-delay:${Math.random()*-30}s;`;rr.appendChild(el);}
-    const sc=document.getElementById('sparkles-container');Object.assign(sc.style,{position:'fixed',inset:'0',pointerEvents:'none',zIndex:'0'});
-    for(let i=0;i<14;i++){const s=document.createElement('div');s.className='sparkle';s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+2}px;height:${Math.random()*3+2}px;animation-duration:${Math.random()*3+2}s;animation-delay:${Math.random()*-5}s;`;sc.appendChild(s);}
-    const bkStars=document.getElementById('bkStars');
-    for(let i=0;i<80;i++){const star=document.createElement('div');star.className='bk-star';const sz=Math.random()*3+.8;const warm=Math.random()>.4;const col=warm?`rgba(${138+Math.floor(Math.random()*60)},${60+Math.floor(Math.random()*40)},${Math.floor(Math.random()*20)},0.6)`:'rgba(200,140,40,0.5)';star.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${col};box-shadow:0 0 ${sz*2}px ${col};animation-duration:${Math.random()*3+1.2}s;animation-delay:${Math.random()*-5}s;`;bkStars.appendChild(star);}
-    const bkSp=document.getElementById('bkSparkles');Object.assign(bkSp.style,{position:'absolute',inset:'0',pointerEvents:'none'});
-    for(let i=0;i<30;i++){const sp=document.createElement('div');sp.className='bk-sparkle';const sz=Math.random()*4+2;sp.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${Math.random()*2.5+1.5}s;animation-delay:${Math.random()*-6}s;`;bkSp.appendChild(sp);}
-    const cStars=document.getElementById('cStars');
-    for(let i=0;i<80;i++){const s=document.createElement('div');s.className='c-star';const sz=Math.random()*2.5+.8;const col=Math.random()>.5?'#f5d060':'#f0a030';s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*75}%;width:${sz}px;height:${sz}px;background:${col};animation-duration:${Math.random()*2.5+1}s;animation-delay:${Math.random()*-4}s;box-shadow:0 0 ${sz*2}px ${col};`;cStars.appendChild(s);}
-    // Partículas mágicas flotantes castillo
-    const cm=document.getElementById('castleMagic');
-    for(let i=0;i<25;i++){const p=document.createElement('div');p.className='cmd';const sz=Math.random()*5+2;const gold=Math.random()>.5;p.style.cssText=`left:${Math.random()*100}%;top:${40+Math.random()*55}%;width:${sz}px;height:${sz}px;background:${gold?'#f0c060':'#e84060'};box-shadow:0 0 ${sz*2}px ${gold?'#f0c060':'#e84060'};animation-duration:${Math.random()*4+3}s;animation-delay:${Math.random()*-9}s;`;cm.appendChild(p);}
-    const audio=document.getElementById('bg-music');const btn=document.getElementById('musicBtn');let playing=false;
-    function startAudio(){if(playing)return;audio.volume=0;audio.play().then(()=>{playing=true;btn.textContent='🎶';btn.classList.add('playing');let vol=0;const fi=setInterval(()=>{vol=Math.min(vol+.025,.38);audio.volume=vol;if(vol>=.38)clearInterval(fi);},100);}).catch(()=>{});}
-    btn.addEventListener('click',()=>{if(!playing)startAudio();else{audio.pause();playing=false;btn.textContent='🎵';btn.classList.remove('playing');}});
-    const bookOverlay=document.getElementById('book-overlay'),bookScene=document.getElementById('bookScene'),book3d=document.getElementById('book3d'),bookCtaText=document.getElementById('bookCtaText'),castleTrans=document.getElementById('castle-transition');let opened=false;
-    document.body.style.overflow='hidden';
+    /* ═══════════════════════════════════════
+       DETECCIÓN DE CAPACIDAD DEL DISPOSITIVO
+       ═══════════════════════════════════════ */
+    const isMobile = window.matchMedia('(hover:none)').matches;
+    const isMidRange = navigator.hardwareConcurrency ? navigator.hardwareConcurrency <= 4 : isMobile;
+
+    // Cuenta de elementos según capacidad
+    const ROSE_COUNT      = isMobile ? 10 : 22;
+    const PARTICLE_COUNT  = isMobile ? 8  : 20;
+    const SPARKLE_COUNT   = isMobile ? 0  : 12;
+    const BKSTAR_COUNT    = isMobile ? 30 : 70;
+    const CSTAR_COUNT     = isMobile ? 35 : 70;
+
+    /* ── Partículas flotantes ── */
+    const pc = document.getElementById('particles');
+    const syms = ['✦','·','•','❦'];
+    for(let i = 0; i < PARTICLE_COUNT; i++){
+        const el = document.createElement('div');
+        el.className = 'particle';
+        el.textContent = syms[i % syms.length];
+        const sz = Math.random() * 7 + 7;
+        el.style.cssText = `left:${Math.random()*100}%;font-size:${sz}px;color:rgba(138,80,16,${Math.random()*.35+.15});animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*-35}s;`;
+        pc.appendChild(el);
+    }
+
+    /* ── Rosas cayendo ── */
+    const rr = document.getElementById('rose-rain');
+    const roseEmojis = ['🌹','🌹','🌸','🌺'];
+    for(let i = 0; i < ROSE_COUNT; i++){
+        const el = document.createElement('div');
+        el.className = 'rose-drop';
+        el.textContent = roseEmojis[i % roseEmojis.length];
+        const sz = Math.random() * 10 + 14;
+        el.style.cssText = `left:${Math.random()*100}%;font-size:${sz}px;animation-duration:${Math.random()*14+10}s;animation-delay:${Math.random()*-30}s;`;
+        rr.appendChild(el);
+    }
+
+    /* ── Destellos (solo desktop) ── */
+    if(SPARKLE_COUNT > 0){
+        const sc = document.getElementById('sparkles-container');
+        Object.assign(sc.style, {position:'fixed',inset:'0',pointerEvents:'none',zIndex:'0'});
+        for(let i = 0; i < SPARKLE_COUNT; i++){
+            const s = document.createElement('div');
+            s.className = 'sparkle';
+            s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+2}px;height:${Math.random()*3+2}px;animation-duration:${Math.random()*3+2}s;animation-delay:${Math.random()*-5}s;`;
+            sc.appendChild(s);
+        }
+    }
+
+    /* ── Estrellas libro (bkStars) ── */
+    const bkStars = document.getElementById('bkStars');
+    for(let i = 0; i < BKSTAR_COUNT; i++){
+        const star = document.createElement('div');
+        star.className = 'bk-star';
+        const sz = Math.random() * 2.5 + .8;
+        const col = `rgba(${138+Math.floor(Math.random()*55)},${55+Math.floor(Math.random()*35)},${Math.floor(Math.random()*18)},0.55)`;
+        star.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${col};animation-duration:${Math.random()*3+1.2}s;animation-delay:${Math.random()*-5}s;`;
+        bkStars.appendChild(star);
+    }
+
+    /* ── Estrellas castillo (cStars) ── */
+    const cStars = document.getElementById('cStars');
+    for(let i = 0; i < CSTAR_COUNT; i++){
+        const s = document.createElement('div');
+        s.className = 'c-star';
+        const sz = Math.random() * 2.2 + .8;
+        const col = Math.random() > .5 ? '#f5d060' : '#f0a030';
+        s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*72}%;width:${sz}px;height:${sz}px;background:${col};animation-duration:${Math.random()*2.5+1}s;animation-delay:${Math.random()*-4}s;`;
+        cStars.appendChild(s);
+    }
+
+    /* ═══════════════════════════════════════
+       AUDIO
+       ═══════════════════════════════════════ */
+    const audio = document.getElementById('bg-music');
+    const btn   = document.getElementById('musicBtn');
+    let playing = false;
+
+    function startAudio(){
+        if(playing) return;
+        audio.volume = 0;
+        audio.play().then(() => {
+            playing = true;
+            btn.textContent = '🎶';
+            btn.classList.add('playing');
+            let vol = 0;
+            const fi = setInterval(() => {
+                vol = Math.min(vol + .025, .38);
+                audio.volume = vol;
+                if(vol >= .38) clearInterval(fi);
+            }, 100);
+        }).catch(() => {});
+    }
+
+    btn.addEventListener('click', () => {
+        if(!playing) startAudio();
+        else {
+            audio.pause();
+            playing = false;
+            btn.textContent = '🎵';
+            btn.classList.remove('playing');
+        }
+    });
+
+    /* ═══════════════════════════════════════
+       LIBRO MÁGICO
+       ═══════════════════════════════════════ */
+    const bookOverlay = document.getElementById('book-overlay');
+    const bookScene   = document.getElementById('bookScene');
+    const book3d      = document.getElementById('book3d');
+    const bookCtaText = document.getElementById('bookCtaText');
+    const castleTrans = document.getElementById('castle-transition');
+    let opened = false;
+
+    document.body.style.overflow = 'hidden';
+
     function openBook(){
-        if(opened)return; opened=true;
+        if(opened) return;
+        opened = true;
         startAudio();
         book3d.classList.add('opening');
         bookCtaText.classList.add('hide');
-        setTimeout(()=>{
+
+        setTimeout(() => {
             bookOverlay.classList.add('fading');
             castleTrans.classList.add('show');
-            setTimeout(()=>{ bookOverlay.style.display='none'; document.body.style.overflow=''; },800);
-            // Typewriter JS — siempre funciona
+            setTimeout(() => {
+                bookOverlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 800);
+
+            /* Typewriter */
             const lines = castleTrans.querySelectorAll('.story-line');
             const roses = castleTrans.querySelector('.story-roses');
-            const texts = ['Érase una vez...','En un reino no muy lejano','Una hermosa princesa','que pronto estaría de cumpleaños.'];
-            const delays = [300, 1600, 2900, 4100]; // ms después de mostrar el castillo
-            const speeds = [55, 45, 50, 38];        // ms por carácter
-            lines.forEach((el,i)=>{
-                el.textContent=''; el.style.opacity='1'; el.style.width='auto';
-                setTimeout(()=>{
-                    let c=0; const txt=texts[i];
-                    const iv=setInterval(()=>{
-                        el.textContent=txt.slice(0,++c);
-                        if(c>=txt.length) clearInterval(iv);
+            const texts   = ['Érase una vez...','En un reino no muy lejano','Una hermosa princesa','que pronto estaría de cumpleaños.'];
+            const delays  = [300, 1600, 2900, 4100];
+            const speeds  = [55, 45, 50, 38];
+
+            lines.forEach((el, i) => {
+                el.textContent = '';
+                el.style.opacity = '1';
+                setTimeout(() => {
+                    let c = 0;
+                    const txt = texts[i];
+                    const iv = setInterval(() => {
+                        el.textContent = txt.slice(0, ++c);
+                        if(c >= txt.length) clearInterval(iv);
                     }, speeds[i]);
                 }, delays[i]);
             });
-            if(roses){ setTimeout(()=>{ roses.style.transition='opacity .8s'; roses.style.opacity='1'; }, 6200); }
+
+            if(roses){
+                setTimeout(() => {
+                    roses.style.transition = 'opacity .8s';
+                    roses.style.opacity = '1';
+                }, 6200);
+            }
         }, 2000);
     }
-    bookScene.addEventListener('click',openBook);
-    const eventDate=new Date('2026-04-25T13:00:00');
-    function tick(){const diff=eventDate-new Date();if(diff<=0){document.getElementById('cdWrap').innerHTML='<div class="cd-done">🌹 ¡Hoy es el gran día! 🌹</div>';return;}const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);document.getElementById('cd-d').textContent=String(d).padStart(2,'0');document.getElementById('cd-h').textContent=String(h).padStart(2,'0');document.getElementById('cd-m').textContent=String(m).padStart(2,'0');document.getElementById('cd-s').textContent=String(s).padStart(2,'0');}
-    tick();setInterval(tick,1000);
-    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.08});
-    document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 
-    // ── CARRUSEL ──
+    bookScene.addEventListener('click', openBook);
+    /* Soporte táctil explícito */
+    bookScene.addEventListener('touchend', e => { e.preventDefault(); openBook(); }, {passive:false});
+
+    /* ═══════════════════════════════════════
+       COUNTDOWN — usa requestAnimationFrame
+       ═══════════════════════════════════════ */
+    const eventDate = new Date('2026-04-25T13:00:00');
+    const cdD = document.getElementById('cd-d');
+    const cdH = document.getElementById('cd-h');
+    const cdM = document.getElementById('cd-m');
+    const cdS = document.getElementById('cd-s');
+    const cdWrap = document.getElementById('cdWrap');
+
+    let lastSec = -1;
+    function tick(){
+        const diff = eventDate - Date.now();
+        if(diff <= 0){
+            cdWrap.innerHTML = '<div class="cd-done">🌹 ¡Hoy es el gran día! 🌹</div>';
+            return;
+        }
+        const s = Math.floor(diff / 1000) % 60;
+        if(s !== lastSec){
+            lastSec = s;
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor(diff % 86400000 / 3600000);
+            const m = Math.floor(diff % 3600000 / 60000);
+            cdD.textContent = String(d).padStart(2,'0');
+            cdH.textContent = String(h).padStart(2,'0');
+            cdM.textContent = String(m).padStart(2,'0');
+            cdS.textContent = String(s).padStart(2,'0');
+        }
+        requestAnimationFrame(tick);
+    }
+    tick();
+
+    /* ═══════════════════════════════════════
+       REVEAL ON SCROLL
+       ═══════════════════════════════════════ */
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+    }, {threshold: .06, rootMargin: '0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+    /* ═══════════════════════════════════════
+       CARRUSEL
+       ═══════════════════════════════════════ */
     (function(){
-        const track = document.getElementById('carTrack');
-        const cards = track ? track.querySelectorAll('.photo-card') : [];
-        const dotsEl = document.getElementById('carDots');
+        const track   = document.getElementById('carTrack');
+        const cards   = track ? track.querySelectorAll('.photo-card') : [];
+        const dotsEl  = document.getElementById('carDots');
         const prevBtn = document.getElementById('carPrev');
         const nextBtn = document.getElementById('carNext');
         if(!track || !cards.length) return;
@@ -1202,43 +1116,48 @@
         let cur = 0;
         const total = cards.length;
 
-        // Crear dots
-        cards.forEach((_,i)=>{
+        /* Crear dots */
+        cards.forEach((_, i) => {
             const d = document.createElement('div');
-            d.className = 'cdot' + (i===0?' active':'');
-            d.addEventListener('click',()=>goTo(i));
+            d.className = 'cdot' + (i === 0 ? ' active' : '');
+            d.addEventListener('click', () => goTo(i));
             dotsEl.appendChild(d);
         });
 
         function getCardWidth(){
-            const c = cards[0];
-            const style = getComputedStyle(track);
-            const gap = parseFloat(style.gap)||22;
-            return c.offsetWidth + gap;
+            const gap = parseFloat(getComputedStyle(track).gap) || 22;
+            return cards[0].offsetWidth + gap;
         }
 
         function goTo(idx){
-            cur = Math.max(0, Math.min(idx, total-1));
-            const w = getCardWidth();
-            track.style.transform = `translateX(-${cur * w}px)`;
-            dotsEl.querySelectorAll('.cdot').forEach((d,i)=>{
-                d.classList.toggle('active', i===cur);
-            });
+            cur = Math.max(0, Math.min(idx, total - 1));
+            track.style.transform = `translateX(-${cur * getCardWidth()}px)`;
+            dotsEl.querySelectorAll('.cdot').forEach((d, i) => d.classList.toggle('active', i === cur));
         }
 
-        prevBtn.addEventListener('click',()=>goTo(cur-1));
-        nextBtn.addEventListener('click',()=>goTo(cur+1));
+        prevBtn.addEventListener('click', () => goTo(cur - 1));
+        nextBtn.addEventListener('click', () => goTo(cur + 1));
 
-        // Swipe táctil
-        let startX=0;
-        track.addEventListener('touchstart',e=>{ startX=e.touches[0].clientX; },{passive:true});
-        track.addEventListener('touchend',e=>{
+        /* Swipe táctil mejorado */
+        let startX = 0, startY = 0, dragging = false;
+        track.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            dragging = true;
+        }, {passive:true});
+
+        track.addEventListener('touchend', e => {
+            if(!dragging) return;
+            dragging = false;
             const dx = e.changedTouches[0].clientX - startX;
-            if(Math.abs(dx)>40) goTo(dx<0 ? cur+1 : cur-1);
-        },{passive:true});
+            const dy = e.changedTouches[0].clientY - startY;
+            /* Solo deslizar si el movimiento fue más horizontal que vertical */
+            if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 35){
+                goTo(dx < 0 ? cur + 1 : cur - 1);
+            }
+        }, {passive:true});
 
-        // Recalcular al resize
-        window.addEventListener('resize',()=>goTo(cur));
+        window.addEventListener('resize', () => goTo(cur), {passive:true});
     })();
 </script>
 </body>
