@@ -52,8 +52,8 @@
         }
 
         html, body {
-            touch-action: none;
             overscroll-behavior: none;
+            touch-action: pan-y;
         }
 
         /* ── ROSAS CAYENDO — reducidas y sin filtros en móvil ── */
@@ -1256,6 +1256,18 @@
             e.preventDefault();
         }
     });
+
+    // Reinicio de posicion
+    // 🔥 Forzar que SIEMPRE inicie arriba
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    // Ir al inicio SIEMPRE
+    window.addEventListener('load', () => {
+        window.scrollTo(0, 0);
+    });
+    
     /* ═══════════════════════════════════════
        DETECCIÓN DE CAPACIDAD DEL DISPOSITIVO
        ═══════════════════════════════════════ */
