@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Primer Cumpleaños de Anya Isabella 🌹</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23fff0f5'/><text y='48' x='8' font-size='46'>🌹</text></svg>" />
@@ -1083,8 +1083,8 @@
             <div class="sched-item"><div class="sched-time">4:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Actividades y diversión</strong>Juegos y sorpresas</div></div>
             <div class="sched-item"><div class="sched-time">5:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Puestos encantados</strong>Dulces y antojitos mágicos</div></div>
             <div class="sched-item"><div class="sched-time">5:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>¡La hora del pastel!</strong>Festejo y piñata</div></div>
-            <div class="sched-item"><div class="sched-time">6:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Recuerdo mágico</strong>Un dulce detalle especial para nuestros pequeños invitados</div></div>
-            <div class="sched-item"><div class="sched-time">6:00 pm</div><div class="sched-dot gold"></div><div class="sched-desc"><strong>Momento encantado</strong>Compartamos juntos los últimos instantes de esta historia</div></div>
+            <div class="sched-item"><div class="sched-time">6:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Recuerdo mágico</strong>Un dulce detalle especial para nuestros pequeños invitados</div></div>
+            <div class="sched-item"><div class="sched-time">7:00 pm</div><div class="sched-dot gold"></div><div class="sched-desc"><strong>Momento encantado</strong>Compartamos juntos los últimos instantes de esta historia</div></div>
         </div>
     </div>
 
@@ -1222,7 +1222,7 @@
     // Cuenta de elementos según capacidad
     const ROSE_COUNT      = isMobile ? 10 : 22;
     const PARTICLE_COUNT  = isMobile ? 8  : 20;
-    const SPARKLE_COUNT   = isMobile ? 0  : 12;
+    const SPARKLE_COUNT   = isMobile ? 4  : 12;
     const BKSTAR_COUNT    = isMobile ? 30 : 70;
     const CSTAR_COUNT     = isMobile ? 35 : 70;
 
@@ -1497,9 +1497,9 @@
                     }
 
                     /* Desbloquear scroll cuando el castillo termina (~10s) */
-                    setTimeout(() => { document.body.style.overflow = ''; }, 10200);
+                    setTimeout(() => { document.body.style.overflow = ''; }, 9000);
                 });
-            }, 1600);
+            }, 2800);
 
         }, 700);
     }
