@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Primer Cumpleaños de Anya Isabella 🌹</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23fff0f5'/><text y='48' x='8' font-size='46'>🌹</text></svg>" />
@@ -52,7 +52,8 @@
         }
 
         html, body {
-            touch-action: manipulation;
+            touch-action: none;
+            overscroll-behavior: none;
         }
 
         /* ── ROSAS CAYENDO — reducidas y sin filtros en móvil ── */
@@ -1217,15 +1218,23 @@
 <button class="music-btn" id="musicBtn" title="Música" aria-label="Reproducir música">🎵</button>
 
 <script>
-    // 🔥 Bloquear TODOS los gestos de zoom SIEMPRE
+    // 🔥 BLOQUEO TOTAL DE ZOOM Y GESTOS (versión PRO)
 
-    // iOS (pinch)
+    // iOS gestures (pinch, rotate)
     ['gesturestart','gesturechange','gestureend'].forEach(event => {
-        document.addEventListener(event, e => e.preventDefault(), { passive: false });
+        document.addEventListener(event, e => {
+            e.preventDefault();
+        }, { passive: false });
     });
 
-    // Android / otros (pinch con scale)
-    document.addEventListener('touchmove', function (e) {
+    // Multi-touch (pinch Android)
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    document.addEventListener('touchmove', function(e) {
         if (e.touches.length > 1) {
             e.preventDefault();
         }
@@ -1240,6 +1249,13 @@
         }
         lastTouchEnd = now;
     }, { passive: false });
+
+    // 🔥 EXTRA: evitar zoom con teclado (desktop)
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && ['+', '-', '0'].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
     /* ═══════════════════════════════════════
        DETECCIÓN DE CAPACIDAD DEL DISPOSITIVO
        ═══════════════════════════════════════ */
@@ -1524,7 +1540,9 @@
                     }
 
                     /* Desbloquear scroll cuando el castillo termina (~10s) */
-                    setTimeout(() => { document.body.style.overflow = ''; }, 9000);
+                    setTimeout(() => {
+                        document.body.style.overflow = 'auto';
+                    }, 9000);
                 });
             }, 3200);
 
