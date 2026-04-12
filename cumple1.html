@@ -38,6 +38,7 @@
         }
 
         html{
+            background:linear-gradient(160deg,#f0deb8 0%,#fdf0d8 35%,#fef8e8 65%,#f5e8c8 100%);
             scroll-behavior:smooth;
             /* CRÍTICO: evita overflow horizontal causado por animaciones */
             overflow-x:hidden;
@@ -612,11 +613,32 @@
             text-shadow:0 0 14px rgba(201,148,58,.65),0 2px 6px rgba(0,0,0,.85);
         }
         /* Tamaños de fuente responsive con clamp mejorado */
+        /* TAMAÑO NORMAL (PC - lo dejas como lo tienes) */
         .story-line:nth-child(1){font-size:clamp(1.6rem,5vw,3.8rem)}
         .story-line:nth-child(2),
         .story-line:nth-child(3),
         .story-line:nth-child(4){font-size:clamp(.95rem,3vw,2rem)}
         .story-roses{font-size:clamp(1rem,3vw,1.6rem);margin-top:.8rem;opacity:0;text-align:center;display:block}
+
+
+
+        /* 🔥 SOLO MOBILE */
+        @media (max-width: 768px){
+
+            .story-line:nth-child(1){
+                font-size:clamp(2.4rem,8vw,4.5rem);
+            }
+
+            .story-line:nth-child(2),
+            .story-line:nth-child(3),
+            .story-line:nth-child(4){
+                font-size:clamp(1.4rem,5vw,2.6rem);
+            }
+
+            .story-roses{
+                font-size:clamp(1.6rem,5vw,2.2rem);
+            }
+        }
 
         #book-overlay.fading{animation:ovFadeOut .9s ease forwards}
         @keyframes ovFadeOut{to{opacity:0;pointer-events:none}}
