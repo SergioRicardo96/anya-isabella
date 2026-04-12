@@ -1309,11 +1309,11 @@
     document.querySelectorAll('.reveal').forEach(r => revObs.observe(r));
 
     /* ═══════════════════════════════════════
-       CARRUSEL
+       CARRUSEL — fix botones y gestos
     ═══════════════════════════════════════ */
     (function(){
         const track   = document.getElementById('carTrack');
-        const cards   = track ? track.querySelectorAll('.photo-card') : [];
+        const cards   = track ? Array.from(track.querySelectorAll('.photo-card')) : [];
         const dotsEl  = document.getElementById('carDots');
         const prevBtn = document.getElementById('carPrev');
         const nextBtn = document.getElementById('carNext');
@@ -1322,6 +1322,7 @@
         let cur = 0;
         const total = cards.length;
 
+        /* Crear dots */
         cards.forEach((_, i) => {
             const d = document.createElement('div');
             d.className = 'cdot' + (i === 0 ? ' active' : '');
@@ -1329,35 +1330,69 @@
             dotsEl.appendChild(d);
         });
 
+        /* Calcula el ancho real de una card + gap usando getBoundingClientRect
+           para evitar el problema de offsetWidth=0 antes del primer paint */
         function getCardWidth() {
-            const gap = parseFloat(getComputedStyle(track).gap) || 22;
-            return cards[0].offsetWidth + gap;
+            const rect = cards[0].getBoundingClientRect();
+            if (rect.width > 0) {
+                const gap = parseFloat(getComputedStyle(track).columnGap ||
+                    getComputedStyle(track).gap) || 22;
+                return rect.width + gap;
+            }
+            /* Fallback si aún no hay layout */
+            return track.scrollWidth / total;
         }
 
         function goTo(idx) {
             cur = Math.max(0, Math.min(idx, total - 1));
-            track.style.transform = `translateX(-${cur * getCardWidth()}px)`;
-            dotsEl.querySelectorAll('.cdot').forEach((d, i) => d.classList.toggle('active', i === cur));
+            const offset = cur * getCardWidth();
+            track.style.transform = `translateX(-${offset}px)`;
+            dotsEl.querySelectorAll('.cdot').forEach((d, i) =>
+                d.classList.toggle('active', i === cur));
         }
 
+        /* Botones */
         prevBtn.addEventListener('click', () => goTo(cur - 1));
         nextBtn.addEventListener('click', () => goTo(cur + 1));
 
-        let startX = 0, startY = 0, dragging = false;
-        track.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-            dragging = true;
-        }, {passive:true});
-        track.addEventListener('touchend', e => {
-            if (!dragging) return;
-            dragging = false;
+        /* Swipe táctil — se registra sobre el WRAP para mayor área de toque */
+        const wrap = track.parentElement;
+        let startX = 0, startY = 0, moved = false;
+
+        wrap.addEventListener('touchstart', e => {
+            startX  = e.touches[0].clientX;
+            startY  = e.touches[0].clientY;
+            moved   = false;
+        }, {passive: true});
+
+        wrap.addEventListener('touchmove', e => {
+            moved = true;
+        }, {passive: true});
+
+        wrap.addEventListener('touchend', e => {
+            if (!moved) return;
             const dx = e.changedTouches[0].clientX - startX;
             const dy = e.changedTouches[0].clientY - startY;
-            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 35) goTo(dx < 0 ? cur + 1 : cur - 1);
-        }, {passive:true});
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
+                goTo(dx < 0 ? cur + 1 : cur - 1);
+            }
+        }, {passive: true});
 
-        window.addEventListener('resize', () => goTo(cur), {passive:true});
+        /* Arrastre con mouse (desktop) */
+        let mouseStartX = 0, mouseDragging = false;
+        track.addEventListener('mousedown', e => {
+            mouseStartX  = e.clientX;
+            mouseDragging = true;
+        });
+        window.addEventListener('mouseup', e => {
+            if (!mouseDragging) return;
+            mouseDragging = false;
+            const dx = e.clientX - mouseStartX;
+            if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+        });
+
+        /* Recalcular posición al rotar o redimensionar */
+        window.addEventListener('resize', () => goTo(cur), {passive: true});
     })();
 </script>
 </body>
