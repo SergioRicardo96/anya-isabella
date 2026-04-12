@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <title>Primer Cumpleaños de Anya Isabella 🌹</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23fff0f5'/><text y='48' x='8' font-size='46'>🌹</text></svg>" />
@@ -49,6 +49,10 @@
             color:var(--text-main);
             font-family:'Cormorant Garamond',serif;
             overflow-x:hidden;
+        }
+
+        html, body {
+            touch-action: manipulation;
         }
 
         /* ── ROSAS CAYENDO — reducidas y sin filtros en móvil ── */
@@ -1213,22 +1217,34 @@
 <button class="music-btn" id="musicBtn" title="Música" aria-label="Reproducir música">🎵</button>
 
 <script>
-    // SOLO bloquea pinch (2 dedos)
-    document.addEventListener('touchstart', function (event) {
-        if (event.touches.length > 1) {
-            event.preventDefault();
+    // Bloquear pinch zoom (iOS)
+    document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+    });
+    document.addEventListener('gesturechange', function (e) {
+        e.preventDefault();
+    });
+    document.addEventListener('gestureend', function (e) {
+        e.preventDefault();
+    });
+
+    // Bloquear zoom en Android y otros
+    document.addEventListener('touchmove', function (e) {
+        if (e.scale !== undefined && e.scale !== 1) {
+            e.preventDefault();
         }
     }, { passive: false });
 
-    // SOLO bloquea doble tap zoom (pero deja scroll)
+    // Bloquear doble tap zoom
     let lastTouchEnd = 0;
-    document.addEventListener('touchend', function (event) {
+    document.addEventListener('touchend', function (e) {
         const now = Date.now();
         if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
+            e.preventDefault();
         }
         lastTouchEnd = now;
     }, { passive: false });
+
     /* ═══════════════════════════════════════
        DETECCIÓN DE CAPACIDAD DEL DISPOSITIVO
        ═══════════════════════════════════════ */
