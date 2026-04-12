@@ -1213,23 +1213,6 @@
 <button class="music-btn" id="musicBtn" title="Música" aria-label="Reproducir música">🎵</button>
 
 <script>
-    // Reinicio de posicion
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
-
-    // ✅ Siempre iniciar arriba (rápido y sin parpadeos)
-    function goTop() {
-        window.scrollTo(0, 0);
-    }
-
-    // Al cargar
-    window.addEventListener('load', goTop);
-
-    // Cuando regresa desde cache (botón atrás, etc.)
-    window.addEventListener('pageshow', (e) => {
-        if (e.persisted) goTop();
-    });
 
     /* ═══════════════════════════════════════
        DETECCIÓN DE CAPACIDAD DEL DISPOSITIVO
@@ -1240,9 +1223,9 @@
     // Cuenta de elementos según capacidad
     const ROSE_COUNT      = isMobile ? 10 : 22;
     const PARTICLE_COUNT  = isMobile ? 8  : 20;
-    const SPARKLE_COUNT   = isMobile ? 4  : 12;
+    const SPARKLE_COUNT   = isMobile ? 0  : 12;
     const BKSTAR_COUNT    = isMobile ? 30 : 70;
-    const CSTAR_COUNT     = isMobile ? 35 : 70;
+    const CSTAR_COUNT     = isMobile ? 30 : 70;
 
     /* ── Partículas flotantes ── */
     const pc = document.getElementById('particles');
