@@ -256,6 +256,55 @@
         .gp-role{display:block;font-family:'Cinzel',serif;font-style:normal;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#8a5010;font-weight:600;margin-top:.35rem}
         @media(max-width:380px){.gp-grid{grid-template-columns:1fr}}
 
+        /* ── PASE DE ABORDAR (boleto) ── */
+        .boarding-pass{
+            position:relative;margin:1rem 0;display:flex;
+            border-radius:10px;overflow:visible;
+            box-shadow:0 4px 24px rgba(0,0,0,.35);
+        }
+        .bp-main{
+            flex:1;min-width:0;position:relative;
+            background:
+                radial-gradient(circle 16px at 12% 15%,rgba(120,128,155,.16),transparent 75%),
+                radial-gradient(circle 11px at 85% 78%,rgba(120,128,155,.13),transparent 75%),
+                linear-gradient(160deg,rgba(244,246,251,.97) 0%,rgba(238,241,249,.99) 100%);
+            border:1px solid rgba(138,80,16,.3);border-right:none;
+            border-radius:10px 0 0 10px;
+            padding:1.2rem 1.1rem;
+        }
+        .bp-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem}
+        .bp-plane{font-size:1.1rem;flex-shrink:0;transform:rotate(-8deg);display:inline-block}
+        .bp-title{font-family:'Cinzel',serif;font-size:.85rem;color:#5a2e00;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+        .bp-code{display:flex;align-items:center;gap:.6rem;margin-bottom:.35rem}
+        .bp-code-airport{font-family:'Cinzel Decorative',cursive;font-size:1.5rem;font-weight:700;color:#12294f;letter-spacing:.02em}
+        .bp-code-line{flex:1;position:relative;height:1px;background:repeating-linear-gradient(90deg,#c9943a 0,#c9943a 4px,transparent 4px,transparent 8px);min-width:20px}
+        .bp-code-line::after{content:'✦';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.6rem;color:#c9943a;background:rgba(244,246,251,1)}
+        .bp-sub{font-family:'IM Fell English',serif;font-style:italic;font-size:.74rem;color:#a03050}
+        .bp-divider{
+            position:relative;width:0;flex-shrink:0;align-self:stretch;
+            border-left:2px dashed rgba(240,192,96,.55);
+        }
+        .bp-stub{
+            flex-shrink:0;width:140px;position:relative;
+            background:linear-gradient(160deg,#3a2a08 0%,#2a1c05 100%);
+            border:1px solid rgba(240,192,96,.4);border-left:none;
+            border-radius:0 10px 10px 0;
+            padding:1.1rem .9rem;
+            display:flex;flex-direction:column;align-items:flex-start;gap:.4rem;
+        }
+        .bp-stub-label{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:#f0c060;opacity:.9}
+        .bp-stub-row{font-family:'IM Fell English',serif;font-size:1.05rem;color:#ffe8b0;font-weight:600;line-height:1.35}
+        .bp-barcode{
+            margin-top:auto;width:100%;height:24px;align-self:stretch;
+            background:repeating-linear-gradient(90deg,#f0c060 0px,#f0c060 2px,transparent 2px,transparent 4px,#f0c060 4px,#f0c060 5px,transparent 5px,transparent 8px);
+            opacity:.8;
+        }
+        @media(max-width:420px){
+            .bp-stub{width:118px;padding:1rem .7rem}
+            .bp-main{padding:1rem .8rem}
+            .bp-stub-row{font-size:.95rem}
+        }
+
         /* ── COUNTDOWN ── */
         .countdown-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:.5rem 0}
         .cd-unit{display:flex;flex-direction:column;align-items:center;gap:.3rem}
@@ -973,6 +1022,30 @@
 
     <div class="roses-row reveal d2">⭐ 🕯️ 🪐 🕯️ ⭐</div>
 
+    <div class="section-label reveal" id="passLabel" style="display:none;">🎫 Tu pase de abordar</div>
+    <div class="boarding-pass reveal d1" id="passCard" style="display:none;">
+        <div class="bp-main">
+            <div class="bp-header">
+                <span class="bp-plane">✈️</span>
+                <div class="bp-title">Pase de Abordar</div>
+            </div>
+            <div class="bp-code">
+                <span class="bp-code-airport">TIE</span>
+                <span class="bp-code-line"></span>
+                <span class="bp-code-airport">B612</span>
+            </div>
+            <div class="bp-sub">Tierra → Asteroide B-612</div>
+        </div>
+        <div class="bp-divider"></div>
+        <div class="bp-stub">
+            <div class="bp-stub-label">Cupo asignado</div>
+            <div class="bp-stub-row" id="passAdultsRow" style="display:none;"><span id="passAdults"></span></div>
+            <div class="bp-stub-row" id="passKidsRow" style="display:none;"><span id="passKids"></span></div>
+            <div class="bp-barcode"></div>
+        </div>
+    </div>
+    <p class="reveal" id="passNote" style="display:none;font-family:'IM Fell English',serif;font-style:italic;font-size:.82rem;color:#c9a86a;text-align:center;margin:.6rem 0 0;">✦ Este pase es válido únicamente para el número de personas indicado ✦</p>
+
     <div class="section-label reveal">⏳ Cuenta regresiva</div>
     <div class="section-card reveal d1">
         <div class="card-top-bar"></div>
@@ -1416,6 +1489,32 @@
     }
     updateCountdown();
     var cdInterval = setInterval(updateCountdown, 1000);
+
+    /* ═══════════════════════════════════════
+       PASE DE ABORDAR — según la URL
+       Ej: cumple2.html?adultos=2&ninos=1
+    ═══════════════════════════════════════ */
+    (function(){
+        const params = new URLSearchParams(location.search);
+        const adultos = parseInt(params.get('adultos'), 10);
+        const ninos = parseInt(params.get('ninos'), 10);
+        const hasAdultos = Number.isFinite(adultos) && adultos > 0;
+        const hasNinos = Number.isFinite(ninos) && ninos > 0;
+        if (!hasAdultos && !hasNinos) return;
+
+        document.getElementById('passLabel').style.display = '';
+        document.getElementById('passCard').style.display = '';
+        document.getElementById('passNote').style.display = '';
+
+        if (hasAdultos) {
+            document.getElementById('passAdultsRow').style.display = '';
+            document.getElementById('passAdults').textContent = adultos + (adultos === 1 ? ' adulto' : ' adultos');
+        }
+        if (hasNinos) {
+            document.getElementById('passKidsRow').style.display = '';
+            document.getElementById('passKids').textContent = ninos + (ninos === 1 ? ' niño' : ' niños');
+        }
+    })();
 
     /* ═══════════════════════════════════════
        REVEAL ON SCROLL
