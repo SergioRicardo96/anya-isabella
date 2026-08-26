@@ -12,10 +12,16 @@
     <meta name="theme-color" content="#0a1830" />
 
     <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="💌 Estás invitado al Primer Cumpleaños y Bautizo de Matías Simón 🪐" />
+    <meta property="og:title"       content="✉️ Estás invitado al Primer Cumpleaños y Bautizo de Matías Simón 🪐" />
     <meta property="og:description" content="Abre el libro y viaja hasta el pequeño planeta de Matías Simón ✨" />
-    <meta property="og:image"       content="/assets/img/matias/invitacion.jpg" />
+    <meta property="og:image"       content="/assets/img/matias/sobre.jpg" />
+    <meta property="og:image:width"  content="800" />
+    <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt"   content="Sobre de invitación — Primer Cumpleaños y Bautizo de Matías Simón" />
     <meta property="og:locale"      content="es_MX" />
+
+    <meta name="twitter:card"  content="summary_large_image" />
+    <meta name="twitter:image" content="/assets/img/matias/sobre.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -93,19 +99,28 @@
             position:relative;margin:0 auto 2rem;
             width:min(270px,68vw);height:min(270px,68vw);
             opacity:0;animation:scaleIn 1.4s .5s cubic-bezier(.34,1.4,.64,1) forwards;
-            transition:transform .4s cubic-bezier(.34,1.4,.64,1);
         }
-        .photo-frame-wrap.moon-shine{transform:scale(1.045)}
+        .moon-orbit{
+            position:absolute;inset:0;
+            animation:moonFloat 7s 1.9s ease-in-out infinite;
+            transition:scale .4s cubic-bezier(.34,1.4,.64,1);
+        }
+        .photo-frame-wrap.moon-shine .moon-orbit{scale:1.045}
+        @keyframes moonFloat{
+            0%,100%{translate:0 0;rotate:-1.2deg}
+            50%{translate:0 -12px;rotate:1.2deg}
+        }
         .photo-ring{
             position:absolute;inset:-24px;
             border-radius:50%;
             border:1px solid rgba(255,253,240,.55);
             background:
-                radial-gradient(circle at 30% 26%,rgba(90,78,55,.42) 0%,rgba(90,78,55,.42) 3.4%,transparent 4.3%),
-                radial-gradient(circle at 60% 54%,rgba(90,78,55,.34) 0%,rgba(90,78,55,.34) 2.6%,transparent 3.4%),
-                radial-gradient(circle at 42% 74%,rgba(90,78,55,.3) 0%,rgba(90,78,55,.3) 2%,transparent 2.8%),
-                radial-gradient(circle at 74% 20%,rgba(90,78,55,.26) 0%,rgba(90,78,55,.26) 1.7%,transparent 2.4%),
-                radial-gradient(circle at 20% 55%,rgba(90,78,55,.22) 0%,rgba(90,78,55,.22) 1.4%,transparent 2.1%),
+                radial-gradient(circle at 30% 26%,rgba(90,78,55,.52) 0%,rgba(90,78,55,.52) 3.6%,transparent 4.6%),
+                radial-gradient(circle at 60% 54%,rgba(90,78,55,.44) 0%,rgba(90,78,55,.44) 2.8%,transparent 3.7%),
+                radial-gradient(circle at 42% 74%,rgba(90,78,55,.4) 0%,rgba(90,78,55,.4) 2.2%,transparent 3%),
+                radial-gradient(circle at 74% 20%,rgba(90,78,55,.36) 0%,rgba(90,78,55,.36) 1.9%,transparent 2.6%),
+                radial-gradient(circle at 20% 55%,rgba(90,78,55,.32) 0%,rgba(90,78,55,.32) 1.6%,transparent 2.3%),
+                radial-gradient(circle at 84% 62%,rgba(90,78,55,.3) 0%,rgba(90,78,55,.3) 1.3%,transparent 2%),
                 radial-gradient(circle at 65% 32%,#fffdf3 0%,#f7ecd2 26%,#e9d8ab 52%,#cdb987 74%,#a89468 92%,#8a7550 100%);
             box-shadow:0 0 50px 12px rgba(245,230,190,.42),inset 0 0 30px rgba(80,65,40,.32);
             transition:box-shadow .5s ease;
@@ -383,6 +398,7 @@
         .bell-verse{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.3em;color:#c9943a}
         .roses-row{display:flex;justify-content:center;gap:.5rem;margin:.8rem 0;font-size:1.2rem}
         .candle-float{font-size:2rem;display:inline-block}
+        .plane-icon{vertical-align:middle}
         @media(hover:hover){.candle-float{animation:candleFlicker 1.8s ease-in-out infinite alternate}}
         @keyframes candleFlicker{0%{filter:drop-shadow(0 0 4px rgba(201,148,58,.4))}100%{filter:drop-shadow(0 0 10px rgba(201,148,58,.7))}}
 
@@ -687,7 +703,8 @@
         /* ── prefers-reduced-motion ── */
         @media(prefers-reduced-motion:reduce){
             .rose-drop,.bk-star,.c-star,.rune-ring-outer,.rune-ring-inner2,
-            .photo-ring,.rose-deco,.candle-float,.bell-icon{animation:none!important}
+            .photo-ring,.moon-orbit,.rose-deco,.candle-float,.bell-icon{animation:none!important}
+            .photo-frame-wrap{opacity:1!important}
             .book-3d{animation:none!important;transform:rotateY(-8deg) rotateX(3deg)}
             .reveal{opacity:1!important;transform:none!important}
             .curio-card{opacity:1!important;transform:none!important}
@@ -953,15 +970,17 @@
     <div class="hero-inner">
         <div class="crown-label"><span>✦ &nbsp; Un año explorando el universo &nbsp; ✦</span></div>
         <div class="photo-frame-wrap" id="moonFrame">
-            <div class="photo-ring"></div>
-            <div class="photo-ring-inner"></div>
-            <div class="photo-oval">
-                <img src="/assets/img/matias/portada.webp" alt="Matías Simón" width="270" height="270" loading="eager" fetchpriority="high" decoding="async"/>
+            <div class="moon-orbit">
+                <div class="photo-ring"></div>
+                <div class="photo-ring-inner"></div>
+                <div class="photo-oval">
+                    <img src="/assets/img/matias/portada.webp" alt="Matías Simón" width="270" height="270" loading="eager" fetchpriority="high" decoding="async"/>
+                </div>
+                <span class="rose-deco rose-tl">⭐</span>
+                <span class="rose-deco rose-tr">⭐</span>
+                <span class="rose-deco rose-bl">⭐</span>
+                <span class="rose-deco rose-br">⭐</span>
             </div>
-            <span class="rose-deco rose-tl">⭐</span>
-            <span class="rose-deco rose-tr">⭐</span>
-            <span class="rose-deco rose-bl">⭐</span>
-            <span class="rose-deco rose-br">⭐</span>
         </div>
         <div class="name-block">
             <div class="name-anya">MATÍAS</div>
@@ -1096,14 +1115,14 @@
             <div><div class="card-title">Programa del día</div><div class="card-label">✦ La bitácora de vuelo ✦</div></div>
         </div>
         <div class="sched-wrap">
-            <div class="sched-item"><div class="sched-time">01:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Misa de bautizo</strong>Iglesia de Santo Domingo de Guzmán</div></div>
-            <div class="sched-item"><div class="sched-time">02:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Aterrizaje de invitados</strong>Bienvenida al planeta de Matías Simón</div></div>
-            <div class="sched-item"><div class="sched-time">03:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Banquete intergaláctico</strong>Un festín lleno de sabor y alegría</div></div>
-            <div class="sched-item"><div class="sched-time">5:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Aventuras y diversión</strong>Juegos y sorpresas</div></div>
-            <div class="sched-item"><div class="sched-time">6:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Mercado de estrellas</strong>Dulces y antojitos mágicos</div></div>
-            <div class="sched-item"><div class="sched-time">7:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>¡La hora del pastel!</strong>Festejo y piñata</div></div>
-            <div class="sched-item"><div class="sched-time">8:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>Recuerdo de las estrellas</strong>Un dulce detalle especial para nuestros pequeños invitados</div></div>
-            <div class="sched-item"><div class="sched-time">8:30 pm</div><div class="sched-dot gold"></div><div class="sched-desc"><strong>Momento bajo las estrellas</strong>Compartamos juntos los últimos instantes de esta historia</div></div>
+            <div class="sched-item"><div class="sched-time">01:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong> MISA DE BAUTIZO</strong>Bendición en la Iglesia de Santo Domingo de Guzmán</div></div>
+            <div class="sched-item"><div class="sched-time">02:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>LLEGADA AL ASTEROIDE B-612</strong>Bienvenida al pequeño planeta de Matías Simón</div></div>
+            <div class="sched-item"><div class="sched-time">03:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>BANQUETE ENTRE LAS ESTRELLAS</strong>Un festín para alimentar el alma y celebrar la amistad</div></div>
+            <div class="sched-item"><div class="sched-time">5:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>JUEGOS Y MISTERIOS DEL PLANETA</strong>Para recordar que todas las personas mayores fueron primero niños</div></div>
+            <div class="sched-item"><div class="sched-time">6:30 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>MERCADO DE POLVO DE ESTRELLAS</strong>Dulces, antojitos y delicias mágicas</div></div>
+            <div class="sched-item"><div class="sched-time">7:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>¡EL RITO DE LA VELA Y EL PASTEL!</strong>Deseos al viento, festejo y piñata</div></div>
+            <div class="sched-item"><div class="sched-time">8:00 pm</div><div class="sched-dot"></div><div class="sched-desc"><strong>REGALOS DEL CORAZÓN</strong>Un pequeño detalle para agradecer a quienes nos han domesticado</div></div>
+            <div class="sched-item"><div class="sched-time">8:30 pm</div><div class="sched-dot gold"></div><div class="sched-desc"><strong>MIRANDO EL CIELO DE NOCHE</strong>Guardemos en el alma los últimos instantes de esta bella historia</div></div>
         </div>
     </div>
 
@@ -1178,7 +1197,9 @@
         <p class="bell-quote">"Uno solo ve bien con el corazón,<br><em>lo esencial</em> es invisible a los ojos.<br>Hoy celebramos lo esencial: a ti."</p>
         <p class="bell-verse">— Con todo el amor del mundo, sus papás ✦</p>
         <div class="roses-row" style="margin-top:1.5rem;font-size:1.4rem;">
-            <span class="candle-float">🌹</span> 🪐 <span class="candle-float" style="animation-delay:.4s;">🌹</span>
+            <span class="candle-float plane-icon" style="transform:scaleX(-1);"><svg viewBox="-30 -13 52 23" width="30" height="14" xmlns="http://www.w3.org/2000/svg"><polygon points="-19,-4 -28,-11 -19,-11" fill="#8b0000"/><rect x="-13" y="-11" width="27" height="4" rx="2" fill="#c41230"/><rect x="-19" y="-4" width="37" height="8" rx="4" fill="#c41230"/><rect x="-13" y="4" width="27" height="4" rx="2" fill="#a3102a"/><circle cx="-2" cy="-2" r="2.2" fill="#fff8e0" opacity=".85"/><circle cx="18" cy="0" r="2.4" fill="#f0c060"/></svg></span>
+            🪐
+            <span class="candle-float plane-icon" style="animation-delay:.4s;"><svg viewBox="-30 -13 52 23" width="30" height="14" xmlns="http://www.w3.org/2000/svg"><polygon points="-19,-4 -28,-11 -19,-11" fill="#8b0000"/><rect x="-13" y="-11" width="27" height="4" rx="2" fill="#c41230"/><rect x="-19" y="-4" width="37" height="8" rx="4" fill="#c41230"/><rect x="-13" y="4" width="27" height="4" rx="2" fill="#a3102a"/><circle cx="-2" cy="-2" r="2.2" fill="#fff8e0" opacity=".85"/><circle cx="18" cy="0" r="2.4" fill="#f0c060"/></svg></span>
         </div>
     </div>
 </div>
