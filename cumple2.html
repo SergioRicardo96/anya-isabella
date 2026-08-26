@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script>if('scrollRestoration' in history){history.scrollRestoration='manual';}</script>
     <title>Primer Cumpleaños y Bautizo de Matías Simón 🪐</title>
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230a1830'/><text y='48' x='8' font-size='42'>🪐</text></svg>" />
@@ -337,47 +338,6 @@
         .fc-bl{bottom:3px;left:3px;transform:scaleY(-1)}.fc-br{bottom:3px;right:3px;transform:scale(-1,-1)}
         .photo-num{position:absolute;top:7px;right:7px;z-index:4;width:18px;height:18px;border-radius:50%;background:rgba(201,148,58,.85);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.55rem;color:#1a0800;font-weight:700}
 
-        /* ── CURIOSIDADES ── */
-        .curio-grid{
-            display:grid;
-            grid-template-columns:repeat(2,1fr);
-            gap:.9rem;margin-top:.4rem;
-        }
-        @media(max-width:340px){.curio-grid{grid-template-columns:1fr}}
-        @media(min-width:700px){.curio-grid{grid-template-columns:repeat(3,1fr)}}
-
-        .curio-card{
-            position:relative;
-            background:
-                radial-gradient(circle 12px at 18% 22%,rgba(120,128,155,.15),transparent 75%),
-                radial-gradient(circle 8px at 80% 15%,rgba(120,128,155,.13),transparent 75%),
-                radial-gradient(circle 10px at 70% 78%,rgba(120,128,155,.13),transparent 75%),
-                linear-gradient(160deg,#fbfcfe 0%,#f2f5fb 55%,#e9edf7 100%);
-            border:1px solid rgba(138,80,16,.28);border-radius:6px;
-            padding:1.3rem .9rem 1rem;
-            display:flex;flex-direction:column;align-items:center;text-align:center;
-            overflow:hidden;
-            opacity:0;transform:translateY(22px);
-            transition:opacity .6s ease,transform .6s ease;
-        }
-        .curio-card.in{opacity:1;transform:translateY(0)}
-        @media(hover:hover){
-            .curio-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(18,41,79,.22)}
-        }
-        .curio-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c9943a,#f0c060,#c9943a,transparent)}
-        .curio-card::after{content:'✦';position:absolute;bottom:6px;right:8px;font-size:.55rem;color:rgba(138,80,16,.35)}
-        .curio-card-tl{position:absolute;top:6px;left:8px;font-size:.55rem;color:rgba(138,80,16,.35);pointer-events:none}
-        .curio-medal{
-            width:50px;height:50px;border-radius:50%;
-            background:radial-gradient(circle,rgba(255,240,180,.9) 0%,rgba(240,200,100,.7) 50%,rgba(201,148,58,.4) 100%);
-            border:1.5px solid rgba(201,148,58,.55);
-            display:flex;align-items:center;justify-content:center;font-size:1.55rem;
-            margin-bottom:.65rem;flex-shrink:0;
-        }
-        .curio-title{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#12294f;font-weight:700;margin-bottom:.35rem;line-height:1.3}
-        .curio-divider{width:40px;height:1px;background:linear-gradient(90deg,transparent,#c9943a,transparent);margin:0 auto .5rem}
-        .curio-body{font-family:'IM Fell English',serif;font-style:italic;font-size:.82rem;color:#1c2340;line-height:1.65}
-
         /* ── CRONOGRAMA ── */
         .sched-wrap{position:relative;padding:.4rem 0 .2rem}
         .sched-wrap::before{content:'';position:absolute;left:74px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(201,148,58,.3) 10%,rgba(201,148,58,.3) 90%,transparent)}
@@ -707,7 +667,6 @@
             .photo-frame-wrap{opacity:1!important}
             .book-3d{animation:none!important;transform:rotateY(-8deg) rotateX(3deg)}
             .reveal{opacity:1!important;transform:none!important}
-            .curio-card{opacity:1!important;transform:none!important}
         }
 
         /* ── SCROLL HINT ── */
@@ -1171,30 +1130,13 @@
         </div>
     </div>
 
-    <div class="section-label reveal">✨ Curiosidades</div>
-    <div class="section-card reveal d1">
-        <div class="card-top-bar"></div>
-        <div class="card-header">
-            <div class="card-icon">🪐</div>
-            <div><div class="card-title">Sobre Matías Simón</div><div class="card-label">✦ Datos mágicos del principito ✦</div></div>
-        </div>
-        <div class="curio-grid" id="curioGrid">
-            <div class="curio-card"><span class="curio-card-tl">✦</span><div class="curio-medal">👑</div><div class="curio-title">Su nombre</div><div class="curio-divider"></div><p class="curio-body">Matías significa "regalo de Dios" y Simón "el que escucha" — un nombre digno de un pequeño explorador.</p></div>
-            <div class="curio-card"><span class="curio-card-tl">✦</span><div class="curio-medal">🌹</div><div class="curio-title">Su rosa</div><div class="curio-divider"></div><p class="curio-body">Como el principito, tiene su propia rosa: la razón por la que su planeta es único en todo el universo.</p></div>
-            <div class="curio-card"><span class="curio-card-tl">✦</span><div class="curio-medal">🦊</div><div class="curio-title">Su superpoder</div><div class="curio-divider"></div><p class="curio-body">Como el zorro de la historia, basta con conocerlo una vez para quedar domesticado por su sonrisa.</p></div>
-            <div class="curio-card"><span class="curio-card-tl">✦</span><div class="curio-medal">⭐</div><div class="curio-title">Su canción</div><div class="curio-divider"></div><p class="curio-body">El principito decía que las estrellas ríen distinto para cada quien — así es su risa: una melodía única para quienes lo aman.</p></div>
-            <div class="curio-card"><span class="curio-card-tl">✦</span><div class="curio-medal">⏳</div><div class="curio-title">Su primer año</div><div class="curio-divider"></div><p class="curio-body">En 365 días aprendió a sonreír, gatear, decir sus primeras sílabas... y ser el centro de nuestro universo.</p></div>
-            <div class="curio-card"><span class="curio-card-tl">✦</span><div class="curio-medal">✨</div><div class="curio-title">Su magia</div><div class="curio-divider"></div><p class="curio-body">Llegó para recordarnos que "lo esencial es invisible a los ojos" — y que él es la prueba más hermosa de eso.</p></div>
-        </div>
-    </div>
-
     <div class="gold-separator reveal" style="margin-top:2rem;">
         <div class="gs-line"></div><div class="gs-center">✦</div><div class="gs-line"></div>
     </div>
 
     <div class="bell-section reveal">
         <span class="bell-icon">🪐</span>
-        <p class="bell-quote">"Uno solo ve bien con el corazón,<br><em>lo esencial</em> es invisible a los ojos.<br>Hoy celebramos lo esencial: a ti."</p>
+        <p class="bell-quote">"Cuando mires al cielo de noche, sabrás que en una de esas estrellas hay una fiesta celebrando la vida de Matías Simón. Gracias por hacer este día inolvidable."</p>
         <p class="bell-verse">— Con todo el amor del mundo, sus papás ✦</p>
         <div class="roses-row" style="margin-top:1.5rem;font-size:1.4rem;">
             <span class="candle-float plane-icon" style="transform:scaleX(-1);"><svg viewBox="-30 -13 52 23" width="30" height="14" xmlns="http://www.w3.org/2000/svg"><polygon points="-19,-4 -28,-11 -19,-11" fill="#8b0000"/><rect x="-13" y="-11" width="27" height="4" rx="2" fill="#c41230"/><rect x="-19" y="-4" width="37" height="8" rx="4" fill="#c41230"/><rect x="-13" y="4" width="27" height="4" rx="2" fill="#a3102a"/><circle cx="-2" cy="-2" r="2.2" fill="#fff8e0" opacity=".85"/><circle cx="18" cy="0" r="2.4" fill="#f0c060"/></svg></span>
@@ -1208,6 +1150,12 @@
 <button class="music-btn" id="musicBtn" title="Música" aria-label="Reproducir música">🎵</button>
 
 <script>
+    /* ═══════════════════════════════════════
+       SIEMPRE INICIAR ARRIBA
+    ═══════════════════════════════════════ */
+    window.scrollTo(0, 0);
+    window.addEventListener('pageshow', () => window.scrollTo(0, 0));
+
     /* ═══════════════════════════════════════
        DETECCIÓN DE CAPACIDAD
     ═══════════════════════════════════════ */
@@ -1423,25 +1371,6 @@
 
     bookScene.addEventListener('click', openBook);
     bookScene.addEventListener('touchend', e => { e.preventDefault(); openBook(); }, {passive:false});
-
-    /* ═══════════════════════════════════════
-       CURIOSIDADES — stagger reveal
-    ═══════════════════════════════════════ */
-    (function(){
-        const grid = document.getElementById('curioGrid');
-        if (!grid) return;
-        const cards = grid.querySelectorAll('.curio-card');
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    const idx = [...cards].indexOf(e.target);
-                    setTimeout(() => e.target.classList.add('in'), idx * 80);
-                    obs.unobserve(e.target);
-                }
-            });
-        }, {threshold:.08});
-        cards.forEach(c => obs.observe(c));
-    })();
 
     /* ═══════════════════════════════════════
        COUNTDOWN
